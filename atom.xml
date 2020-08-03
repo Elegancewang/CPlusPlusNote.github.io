@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://github.com/Elegancewang/LearnCplusplus.github.io</id>
+    <title>Mybase</title>
+    <updated>2020-08-03T03:48:42.587Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://github.com/Elegancewang/LearnCplusplus.github.io"/>
+    <link rel="self" href="https://github.com/Elegancewang/LearnCplusplus.github.io/atom.xml"/>
+    <logo>https://github.com/Elegancewang/LearnCplusplus.github.io/images/avatar.png</logo>
+    <icon>https://github.com/Elegancewang/LearnCplusplus.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2020, Mybase</rights>
+    <entry>
+        <title type="html"><![CDATA[C++学习笔记]]></title>
+        <id>https://github.com/Elegancewang/LearnCplusplus.github.io/post/learnC/</id>
+        <link href="https://github.com/Elegancewang/LearnCplusplus.github.io/post/learnC/">
+        </link>
+        <updated>2020-08-02T06:01:37.000Z</updated>
+        <content type="html"><![CDATA[<!-- more -->
+<h1 id="chapter-8">Chapter 8</h1>
+<p>指针、引用<br>
+<strong>指针</strong>—— 存储内存地址<br>
+<strong>变量</strong> ——占用空间、声明、初始化（否则值为随机）</p>
+<h2 id="81-使用引用运算符获取变量地址">8.1 使用引用运算符（&amp;）获取变量地址</h2>
+<p>e.g. Varname —— 变量<br>
+&amp;Varname —— 存储该变量内存地址</p>
+<h3 id="12">1.2</h3>
+<h1 id="chapter-11">Chapter 11</h1>
+<p>**</p>
+<h2 id="111-多态基础">11.1.  多态基础</h2>
+<h3 id="11">1.1</h3>
+<p><strong>类之间存在层次结构，类是通过继承相关联时，通过多态来表示。</strong><br>
+多态意味着调用成员函数时，根据函数的对象类型执行不同的方法。（而不是调用预设的基类中的函数方法），即表现实际类型。</p>
+<h3 id="12-2">1.2</h3>
+<p><strong>使用虚函数实现多态行为</strong></p>
+<p>将基类中方法声明为虚函数，使用关键字 virtual， 确保编译器调用覆盖版本（子类、派生类）。</p>
+<p><mark>多态行为</mark> 将派生类对象视为几类对象，并执行派生类的函数（方法）实现。</p>
+<h3 id="13-为何需要虚构造函数">1.3 为何需要<mark>虚构造函数</mark></h3>
+<p>除了需要使用派生类对象，还需要避免计算机资源未释放、内存泄露等问题（即将实例化的派生类对象，将其值赋给基类当做指针，并通过该指针调用 delete， 将不会调用派生类的析构函数）</p>
+<pre><code>												**⬇**
+</code></pre>
+<p>那么将析构函数声明为虚函数，确保通过基类指针调用delete时，不会调用派生类析构函数</p>
+<pre><code class="language-cpp">class Base
+{
+public:
+	virtual ~Base()		
+};
+
+</code></pre>
+<h1 id="auto-关键字">auto 关键字</h1>
+<p>利用auto关键字，通过编译器检查变量的初始值，并将该变量类型设置为该返回值的类型。能够简化编码工作。</p>
+<pre><code class="language-cpp">std::vector&lt;int&gt; MyNumbers;
+	//常规
+	for (vector&lt;int&gt;::const_iterator Iterator =  MyNumbers.begin(); 
+		Iterator &lt; MyNumbers.end(); ++Iterator )
+	std::cout &lt;&lt; * Iterator&lt;&lt; &quot; &quot;;
+	//利用auto关键字
+		for (auto Iterator =  MyNumbers.begin(); 
+		Iterator &lt; MyNumbers.end(); ++Iterator )
+	std::cout &lt;&lt; * Iterator&lt;&lt; &quot; &quot;;
+</code></pre>
+<p>**</p>
+]]></content>
+    </entry>
+</feed>
