@@ -2,13 +2,90 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://elegancewang.github.io/CPlusPlusNote.github.io</id>
     <title>Renzo&apos;s Blog</title>
-    <updated>2020-09-05T12:37:58.670Z</updated>
+    <updated>2020-09-21T07:16:40.815Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://elegancewang.github.io/CPlusPlusNote.github.io"/>
     <link rel="self" href="https://elegancewang.github.io/CPlusPlusNote.github.io/atom.xml"/>
     <logo>https://elegancewang.github.io/CPlusPlusNote.github.io/images/avatar.png</logo>
     <icon>https://elegancewang.github.io/CPlusPlusNote.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Renzo&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[WebRTC 环境配置]]></title>
+        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/webrtc-huan-jing-pei-zhi/</id>
+        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/webrtc-huan-jing-pei-zhi/">
+        </link>
+        <updated>2020-09-16T00:40:46.000Z</updated>
+        <content type="html"><![CDATA[<p>万事开头难啊，webRTC配置过程中遇到的问题多种多样，有些问题很难搜索到，因此我记录下来供自己参考。</p>
+<h1 id="写在前面的话">写在前面的话</h1>
+<p>鉴于WebRTC更新太快，所以网上很多编译方法都失效了，所以如果你看到是几年前的文章，就没必要较真了。本文写作时间为2020年9月16日，WebRTC为当前最新版本。请诸君参考。（另，本人所在地为HK，因此不需要稳定的梯子，希望大家能找到稳定的梯子。）</p>
+<h1 id="1准备">1.准备</h1>
+<p>a) <strong>Win 10 64bit 1909</strong></p>
+<p>b) <strong>Visual Studio 2019 Community 16.7.30503.244</strong></p>
+<p>c) <strong>Windows 10 SDK</strong><br>
+Windows 10.0.19041.1<br>
+<img src="https://elegancewang.github.io/CPlusPlusNote.github.io/post-images/1600217267438.png" alt="" loading="lazy"></p>
+<p>d) <strong>Python</strong></p>
+<p>Python 3.8.5 64bit，编译过程中需添加到Path环境变量</p>
+<p>f) <strong>depot_tools</strong><br>
+depot_tools是包含下载、编译的相关工具，需要先下载并配置它，才能继续后面的操作。<br>
+下载地址:<a href="https://storage.googleapis.com/chrome-infra/depot_tools.zip">depot_tools</a></p>
+<p>下载后解压，并将解压好的depot_tools目录添加到path系统环境变量中，如下图所示：</p>
+<figure data-type="image" tabindex="1"><img src="https://elegancewang.github.io/CPlusPlusNote.github.io/post-images/1600218587975.png" alt="" loading="lazy"></figure>
+<h1 id="2-环境变量配置">2 环境变量配置</h1>
+<p>有大量的环境变量需要配置，如果在cmd中set需要保持该窗口。一般在系统环境变量编辑里比较简单方便。<br>
+最开始我的设置如下：</p>
+<pre><code>DEPOT_TOOLS_UPDATE=0                                 #不更新depot_tools
+DEPOT_TOOLS_WIN_TOOLCHAIN=0                          #编译时使用本机VS工具链
+GYP_MSVS_VERSION = 2019                              #指定VS版本
+GYP_MSVS_OVERRIDE_PATH = C:\Program Files (x86)\Microsoft Visual Studio\2019\Community  #vs安装路径，替换成自己的
+GYP_GENERATORS=msvs-ninja,ninja                      #使用ninja编译
+
+</code></pre>
+<p><strong>Error</strong><br>
+depot_tools/python3_bin_reldir.txt: No such file or directory<br>
+failed to determine Python version</p>
+<p>我认为是环境变量阻止了其在Windows下的引导，因此删去<code>DEPOT_TOOLS_UPDATE=0</code> 的环境变量即可.</p>
+<h1 id="3获取webrtc源码">3.获取WebRTC源码</h1>
+<p>接着执行<code>gclient</code>命令，安装编译需要用到的一些工具，比如git以及python。</p>
+<p>其他的环境变量我们已经在前文设置，无需通过cmd进行设置，这是为了我自己的方便，如果对于环境变量有要求，请在cmd自行设置，例：</p>
+<pre><code>set vs2019_install=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community
+set GYP_MSVS_OVERRIDE_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community 
+set GYP_GENERATORS=msvs-ninja,ninja
+# 告诉depot_tools使用我们本机的VS进行编译
+set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+
+</code></pre>
+<p>然后cd到要放源码的地方（要遵守前面说的磁盘要求），执行：</p>
+<pre><code>mkdir webrtc-checkout
+cd webrtc-checkout
+fetch --nohooks webrtc
+gclient sync
+
+</code></pre>
+<p>这一过程的时间比较长，包括源码以及一些测试的音视频文件资源等。如果没有稳定快速的梯子需要等待较长时间。</p>
+<p>如果因为网络等原因中断了，就再执行<code>gclient sync</code>。如果这一步一直卡着不动，可以执行<code>ctrl+c</code>，然后执行<code>gclient sync</code>。</p>
+<h1 id="4编译">4.编译</h1>
+<p>生成VS2019工程文件：</p>
+<pre><code>cd src
+gn gen --ide=vs out/Default
+
+</code></pre>
+<p>可以在src\out\Default\ 下得到 all.sln解决方案文件。</p>
+<p>如果不想使用默认编译参数，可以使用gn args out/Default --list查看当前编译参数，通过类似如下方式设置：<br>
+<code>gn gen --ide=vs out/Default --args=“use_rtti=true is_clang=false rtc_build_tools=false rtc_include_tests=false rtc_build_examples=false”</code></p>
+<p>接着执行编译命令：</p>
+<pre><code>ninja -C out/Default
+</code></pre>
+<h1 id="代码更新">代码更新</h1>
+<pre><code>git checkout master
+git pull origin master
+gclient sync
+
+</code></pre>
+<h1 id="引用webrtc库">引用WebRTC库</h1>
+<p>WebRTC编译后会在src\out\Default\obj目录下生成整个WebRTC工程的静态库：webrtc.lib，链接下这个就可以了。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[C++学习笔记]]></title>
         <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/learnC/</id>
@@ -176,6 +253,38 @@ public:
 <p>CHELSEA、DOTA</p>
 <h2 id="联系我呀">📬 联系我呀</h2>
 <p>githubwrz@163.com</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/hello-gridea/</id>
+        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/hello-gridea/">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="https://gridea.dev/">Gridea 主页</a><br>
+<a href="http://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
 </feed>
