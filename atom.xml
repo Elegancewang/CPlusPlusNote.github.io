@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://elegancewang.github.io/CPlusPlusNote.github.io</id>
     <title>Renzo&apos;s Blog</title>
-    <updated>2020-11-08T12:20:31.623Z</updated>
+    <updated>2020-11-09T18:10:50.604Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://elegancewang.github.io/CPlusPlusNote.github.io"/>
     <link rel="self" href="https://elegancewang.github.io/CPlusPlusNote.github.io/atom.xml"/>
@@ -10,15 +10,156 @@
     <icon>https://elegancewang.github.io/CPlusPlusNote.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Renzo&apos;s Blog</rights>
     <entry>
-        <title type="html"><![CDATA[密码学]]></title>
-        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/tu-jie-mi-ma-ji-zhu-ri-jie-cheng-hao-zong-jie/</id>
-        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/tu-jie-mi-ma-ji-zhu-ri-jie-cheng-hao-zong-jie/">
+        <title type="html"><![CDATA[Linux添加网卡]]></title>
+        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/</id>
+        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/">
         </link>
-        <updated>2020-10-02T12:41:38.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="423明文分组与密文分组">4.2.3明文分组与密文分组</h3>
-<h2 id="44-cbc模式">4.4 CBC模式</h2>
-<h3 id="441-说明">4.4.1 说明</h3>
-<p>CBC</p>
+        <updated>2020-11-03T07:48:52.000Z</updated>
+        <content type="html"><![CDATA[<p>Debian/Ubuntu系列</p>
+<p>方法一：</p>
+<p><code>sudo ifconfig eth0:0 192.168.1.63 up</code></p>
+<p>eth0网卡上创建一个叫eth0:0的虚拟网卡,他的地址是:192.168.1.63</p>
+<p>如果不想要这个虚拟网卡了,可以使用如下命令删除:</p>
+<p><code>sudo ifconfig eth0:0 down</code></p>
+<p>方法二：</p>
+<p><code>vim /etc/network/interfaces</code></p>
+<p>添加并保存例如以下内容：</p>
+<pre><code>auto eth0:0
+
+iface eth0:0 inet static
+
+address 192.168.1.63
+
+netmask 255.255.255.0
+
+network 192.168.1.1
+
+broadcast 192.168.1.255
+</code></pre>
+<p>重启网卡生效</p>
+<p><code>/etc/init.d/networking restart</code></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[TC(Traffic Control)]]></title>
+        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/tctraffic-control/</id>
+        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/tctraffic-control/">
+        </link>
+        <updated>2020-10-27T01:59:10.000Z</updated>
+        <summary type="html"><![CDATA[<p>Linux中的流量控制</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Linux中的流量控制</p>
+<!-- more -->
+<h1 id="1-tc原理">1. TC原理</h1>
+<p>Linux操作系统中的流量控制器TC（Traffic Control）用于Linux内核的流量控制，主要是通过在输出端口处建立一个队列来实现流量控制。<br>
+接收包从输入接口进来后，经过流量限制丢弃不符合规定的数据包，由输入多路分配器进行判断选择：</p>
+<ul>
+<li>如果接收包的目的主机是本主机，那么将该包送给上层处理，否则需要进行转发，将接收包交到转发块（Forwarding Block）处理。</li>
+<li>转发块同时也接收本主机上层(TCP、UDP等)产生的包，通过查看路由表，决定所处理包的下一跳。</li>
+<li>然后，对包进行排列以便将它们送到输出接口。</li>
+</ul>
+<p>一般只能限制网卡发送的数据包，不能限制网卡接收的数据包，所以可以通过改变发送次序来控制传输速率。Linux流量控制主要是在输出接口排列时进行处理和实现的。</p>
+<h1 id="2-规则">2. 规则</h1>
+<h2 id="21-队列queues-和排队规则queueing-disciplines">2.1 队列（Queues） 和排队规则（Queueing Disciplines）</h2>
+<p>通过对包进行<strong>排队</strong>（queuing），我们可以决定数据的<strong>发送方式</strong>（the way in which data is SENT）。但理解下面这一点非常重要：我们<strong>只能对发送</strong>（transmit）<strong>的数据进行整形</strong>（shape the data）。</p>
+<p><strong>互联网的工作机制</strong>决定了<strong>接收端无法直接控制发送端的行为</strong>。这就像你家的 （实体！）邮箱一样：除非能联系到所有人（告诉他们未经同意不要寄信给你），否则 你无法控制别人寄多少东西过来。😉</p>
+<p>但与实际生活不同的是，互联网基于 TCP/IP 协议栈，这多少会带来一些帮助。TCP/IP 无法提前知道两台主机之间的网络带宽，因此开始时它会以越来越快的速度发送数据（慢启 动），直到开始出现丢包，这时它知道已经没有可用空间来存储这些待发送的包了，因此就会 降低发送速度。TCP/IP 的实际工作过程比这个更智能一点，我们后面会再讨论。</p>
+<p>这就好比你留下一半的信件在实体邮箱里不取，期望别人知道这个状况后会停止给你寄新的信件。 但不幸的是，<strong>这种方式只对互联网管用，对你的实体邮箱无效</strong> 😃</p>
+<p>如果内网有一台路由器，你希望限制某几台主机的下载速度，那你应该找到发送数据到 这些主机的路由器内部接口（inner interface of your router），然后在这些 <strong>路由器内部接口</strong>上做 <strong>整流</strong>（traffic shaping，流量整形）。</p>
+<p>此外，还要确保<strong>链路瓶颈</strong>（bottleneck of the link）也在你的控制范围内。例如，如果网 卡是 100Mbps，但路由器的链路带宽是 256Kbps，那首先应该<strong>确保不要发送过多数据给路由器</strong>，因为它可能扛不住。<strong>否则，链路控制和带宽整形的决定权就不在主机侧而到路由器侧了</strong>。要达到限速目的，我们需要对“<strong>发送队列</strong>”有完全的把控（”own the queue”），这里的“发送队列”也就是<strong>整条链路上最慢的一段</strong>（slowest link in the chain）。 幸运的是，大多数情况下这个条件都是能满足的。</p>
+<h2 id="22-simple-classless-qdisc简单-不分类排队规则">2.2 Simple， classless qdisc（简单、不分类排队规则）</h2>
+<p>如前所述，<strong>排队规则</strong>（queueing disciplines）改变了数据的发送方式。</p>
+<p><strong>不分类（或称无类别）排队规则</strong>（classless queueing disciplines）可以对某个网络 接口（interface）上的所有流量进行<strong>无差别整形</strong>。包括对数据进行：</p>
+<ul>
+<li>重新调度（reschedule）</li>
+<li>增加延迟（delay）</li>
+<li>丢弃（drop）</li>
+</ul>
+<p>与 classless qdisc 对应的是 classful qdisc，即<strong>有类别（或称分类别）排队规则</strong>，后者是一个<strong>排队规则中又包含其他排队规则</strong>（qdisc-containing-qdiscs）！😮 先理解了 classless qdisc，才能理解 classful qdisc。<br>
+目前最常用的 classless qdisc 是 <code>pfifo_fast qdisc</code>，这也是默认排队规则。 这也解释了为什么这些高级功能如此健壮：本质上来说，它们只不过是“另一个队列”而 已（nothing more than ‘just another queue’）。<br>
+每种队列都有自己的优缺点。其中一些可能测试的并不全面。</p>
+<h2 id="22-pfifo_fast先入先出队列">2.2 pfifo_fast（先入先出队列）</h2>
+<p>如名字所示，这是一个先入先出队列（First In, First Out），因此对所有包都一视同仁。</p>
+<p>pfifo_fast 有<strong>三个所谓的 “band”</strong>（可理解为三个队列），编号分别为 0、1、2：</p>
+<ul>
+<li><strong>每个 band 上分别执行 FIFO 规则</strong>。</li>
+<li><strong>如果 band 0 有数据，就不会处理 band 1</strong>；同理，band 1 有数据时， 不会去处理 band 2。</li>
+<li>内核会检查<strong>数据包的 TOS 字段</strong>，将**“最小延迟”的包放到 band 0**。</li>
+</ul>
+<p>不要将 <code>pfifo_fast qdisc</code> 与后面介绍的 <code>PRIO qdisc</code> 混淆，后者是 classful 的！ 虽然二者行为类似，但 <strong><code>pfifo_fast</code> 是无类别</strong>的，这意味你<strong>无法通过 <code>tc</code> 命令向 <code>pfifo_fast</code> 内添加另一个 qdisc。</strong></p>
+<h3 id="221-参数与用法">2.2.1 参数与用法</h3>
+<p><code>pfifo_fast qdisc</code> 默认配置是写死的（the hardwired default），因此<strong>无法更改</strong>。</p>
+<p>下面介绍这份写死的配置是什么样的。</p>
+<ul>
+<li><strong><code>priomap</code></strong><br>
+<code>priomap</code> 决定了<strong>如何将内核设置的 packet priority 映射到 band</strong>。priority 位于包的 TOS 字段：</li>
+</ul>
+<pre><code>     0     1     2     3     4     5     6     7
+  +-----+-----+-----+-----+-----+-----+-----+-----+
+  |                 |                       |     |
+  |   PRECEDENCE    |          TOS          | MBZ |
+  |                 |                       |     |
+  +-----+-----+-----+-----+-----+-----+-----+-----+s
+</code></pre>
+<p>TOS 字段占用 4 个比特，各 bit 含义如下：</p>
+<pre><code>  Binary Decimcal  Meaning
+  -----------------------------------------
+  1000   8         Minimize delay (md)
+  0100   4         Maximize throughput (mt)
+  0010   2         Maximize reliability (mr)
+  0001   1         Minimize monetary cost (mmc)
+  0000   0         Normal Service
+</code></pre>
+<p><code>tcpdump -vv</code> 会打印包的 TOS 字段，其中的 TOS 值对应下面的第一列：</p>
+<pre><code class="language-sql">  TOS     Bits  Means                    Linux Priority    Band
+  ------------------------------------------------------------
+  0x0     0     Normal Service           0 Best Effort     1
+  0x2     1     Minimize Monetary Cost   1 Filler          2
+  0x4     2     Maximize Reliability     0 Best Effort     1
+  0x6     3     mmc+mr                   0 Best Effort     1
+  0x8     4     Maximize Throughput      2 Bulk            2
+  0xa     5     mmc+mt                   2 Bulk            2
+  0xc     6     mr+mt                    2 Bulk            2
+  0xe     7     mmc+mr+mt                2 Bulk            2
+  0x10    8     Minimize Delay           6 Interactive     0
+  0x12    9     mmc+md                   6 Interactive     0
+  0x14    10    mr+md                    6 Interactive     0
+  0x16    11    mmc+mr+md                6 Interactive     0
+  0x18    12    mt+md                    4 Int. Bulk       1
+  0x1a    13    mmc+mt+md                4 Int. Bulk       1
+  0x1c    14    mr+mt+md                 4 Int. Bulk       1
+  0x1e    15    mmc+mr+mt+md             4 Int. Bulk       1
+</code></pre>
+<p>第二列是对应的十进制表示，第三列是对应的含义。例如，<code>15</code> 表示这个包期望 <code>Minimal Monetary Cost</code> + <code>Maximum Reliability</code> + <code>Maximum Throughput</code> + <code>Minimum Delay</code>。我把这样的包称为“荷兰包”（a ‘Dutch Packet’。荷兰人比较 节俭/抠门，译注）。<strong>第四列是对应到 Linux 内核的优先级；最后一列是 映射到的 band</strong>，从命令行输出看，形式为：</p>
+<pre><code>  1, 2, 2, 2, 1, 2, 0, 0 , 1, 1, 1, 1, 1, 1, 1, 1
+</code></pre>
+<p>例如，priority 4 会映射到 band 1。priomap 还能列出 priority &gt; 7 的那些 不是由 TOS 映射、而是由其他方式设置的优先级。例如，下表列出了<strong>应用（application）是如何设置它们的 TOS 字段</strong>的，来自 RFC 1349（更多信息可<a href="https://tools.ietf.org/html/rfc1349">阅读全文</a>)</p>
+<pre><code>  TELNET                   1000           (minimize delay)
+  FTP     Control          1000           (minimize delay)
+          Data             0100           (maximize throughput)
+    
+  TFTP                     1000           (minimize delay)
+    
+  SMTP    Command phase    1000           (minimize delay)
+          DATA phase       0100           (maximize throughput)
+    
+  DNS     UDP Query        1000           (minimize delay)
+          TCP Query        0000
+          Zone Transfer    0100           (maximize throughput)
+    
+  NNTP                     0001           (minimize monetary cost)
+    
+  ICMP    Errors           0000
+          Requests         0000 (mostly)
+          Responses        &lt;same as request&gt; (mostly)
+</code></pre>
+<ul>
+<li><code>txqueuelen</code><br>
+发送队列长度，是一个网络接口（interface）参数，可以用 <code>ifconfig</code> 命令设置。例 如，<code>ifconfig eth0 txqueuelen 10</code>。<br>
+<code>tc</code> 命令无法修改这个值。
+<h2 id="23-tbftoken-bucket-filter令牌桶过滤器">2.3 TBF（Token Bucket Filter，令牌桶过滤器）</h2>
+</li>
+</ul>
 ]]></content>
     </entry>
     <entry>

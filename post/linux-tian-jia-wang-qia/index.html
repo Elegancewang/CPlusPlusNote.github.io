@@ -2,10 +2,9 @@
 <html>
 
 <head>
-    
-        <meta charset="utf-8" />
+    <meta charset="utf-8" />
 <title>
-    友链 | Renzo&#39;s Blog
+    Renzo&#39;s Blog
 </title>
 <!--[if lt IE 9]><script src="//cdn.bootcss.com/html5shiv/r29/html5.js"></script><![endif]-->
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -53,7 +52,6 @@
                                 })();
                             </script>
                             
-            
 </head>
 
 <body>
@@ -176,34 +174,133 @@
                 <div class="container">
                     <article class="post-wrap">
                         <header class="post-header">
-                            <h1 class="post-title zh">
-                                &#x53CB;&#x94FE;
+                            <h1 class="post-title">
+                                Linux添加网卡
                             </h1>
-                            <h1 class="post-title en">
-                                Friends
-                            </h1>
-                        </header>
-                        <div class="post-content">
                             
-                                
-                                    <div class="friend-box">
-                                        <img class="friend-avatar" src="https://blog.itjoker.cn/images/avatar.png">
-                                        <div class="flink-info">
-                                            <a href="https://blog.itjoker.cn" target="_blank">
-                                                ITJoker
-                                            </a>
-                                            <br />
-                                            ITJoker&#39;s Blog
-                                        </div>
+                                    <!--zh-->
+                                    <div class="post-meta zh">
+                                        &#x4F5C;&#x8005;:
+                                        <a itemprop="author" rel="author" href="/">
+                                            Renzo's Blog
+                                        </a>
+                                        <span class="post-time">&#x65E5;&#x671F;: <a href="#">11-03-2020</a></span>
+                                        <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
+                                    href="#">0.6
+                                    &#x5206;&#x949F;</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">124</a></span>
+                                        
+                                                阅读量:
+                                                <span data-hk-page="current"> - </span>
+                                                
                                     </div>
                                     
-                                        
+                        </header>
+                        
+                        <div class="post-content">
+                            <p>Debian/Ubuntu系列</p>
+<p>方法一：</p>
+<p><code>sudo ifconfig eth0:0 192.168.1.63 up</code></p>
+<p>eth0网卡上创建一个叫eth0:0的虚拟网卡,他的地址是:192.168.1.63</p>
+<p>如果不想要这个虚拟网卡了,可以使用如下命令删除:</p>
+<p><code>sudo ifconfig eth0:0 down</code></p>
+<p>方法二：</p>
+<p><code>vim /etc/network/interfaces</code></p>
+<p>添加并保存例如以下内容：</p>
+<pre><code>auto eth0:0
+
+iface eth0:0 inet static
+
+address 192.168.1.63
+
+netmask 255.255.255.0
+
+network 192.168.1.1
+
+broadcast 192.168.1.255
+</code></pre>
+<p>重启网卡生效</p>
+<p><code>/etc/init.d/networking restart</code></p>
+
                         </div>
+                        
+                            <div class="post-toc">
+                                
+                            </div>
+                            
+                                
+                                    
+                                            <!--zh-->
+                                            <section class="post-copyright zh">
+                                                <p class="copyright-item ">
+                                                    <span>&#x4F5C;&#x8005;:</span>
+                                                    <span>Renzo's Blog</span>
+                                                </p>
+
+                                                <p class="copyright-item">
+                                                    <span>&#x6C38;&#x4E45;&#x94FE;&#x63A5;:</span>
+                                                    <span><a href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/">https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/</a></span>
+                                                </p>
+
+                                                <p class="copyright-item">
+                                                    <span>&#x534F;&#x8BAE;:</span>
+                                                    <span>MIT License</span>
+                                                </p>
+                                            </section>
+                                            
+                                                
+                                                    
+                                                                    <!--Share-->
+                                                                    <span style="margin-right:15px">
+                        <i class="post-share"></i>
+                        <span>&#x5206;&#x4EAB;:</span>
+                                                                    <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/"><i class="fa fa-qrcode"></i></a>
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/&sharesource=qzone&title=Linux添加网卡&pics=https://elegancewang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1604945447035&summary="><i class="fa fa-qq"></i></a>
+                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/&sharesource=weibo&title=Linux添加网卡 + " - " + &pic="https://elegancewang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1604945447035 "><i class="fa fa-weibo "></i></a>
+
+                                                                    </span>
+                                                                    
+                                                                        <div class="reward ">
+                                                                            <div class="reward-button ">&yen;
+                                                                                <span class="reward-code "> 
+                        <span class="alipay-code "> <img class="alipay-img " alt = "support " src="https://blog.itjoker.cn/alipay.jpg"><b>支付宝</b> </span>
+                                                                                <span class="wechat-code "> <img alt ="support " class="wechat-img " src="https://blog.itjoker.cn/wechat.jpg"><b>微信</b> </span> </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                            <!--zh-->
+                                                                            <section class="post-tags zh ">
+                                                                                <div>
+                                                                                    <span>&#x6807;&#x7B7E;:</span>
+                                                                                    <span class="tag ">
+                        
+                                </span>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <a href="javascript:window.history.back();">
+                        &#x8FD4;&#x56DE;</a>
+                                                                                    <span>&dot;</span>
+                                                                                    <a href="#">&#x4E3B;&#x9875;</a>
+                                                                                </div>
+                                                                            </section>
+
+                                                                            
+                                                                                <!---->
+                                                                                <section class="post-nav">
+                                                                                    
+                                                                                            
+                                                                                                <a class="next" rel="next" href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/tctraffic-control/">
+                                                                                                    TC(Traffic Control)
+                                                                                                </a>
+                                                                                                
+                                                                                </section>
                     </article>
                 </div>
+                
+                                            
             </div>
-            
-                                        
+    </div>
+    </div>
     </div>
     
     <div id="player"></div>
@@ -328,6 +425,10 @@
                         tpwidget("show");
                     </script>
                     
+        </div>
 </body>
+<script>
+    scroll();
+</script>
 
 </html>
