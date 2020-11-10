@@ -1,52 +1,204 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://elegancewang.github.io/CPlusPlusNote.github.io</id>
-    <title>Renzo&apos;s Blog</title>
-    <updated>2020-11-10T05:10:28.197Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://elegancewang.github.io/CPlusPlusNote.github.io"/>
-    <link rel="self" href="https://elegancewang.github.io/CPlusPlusNote.github.io/atom.xml"/>
-    <logo>https://elegancewang.github.io/CPlusPlusNote.github.io/images/avatar.png</logo>
-    <icon>https://elegancewang.github.io/CPlusPlusNote.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Renzo&apos;s Blog</rights>
-    <entry>
-        <title type="html"><![CDATA[Linux添加网卡]]></title>
-        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/</id>
-        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/">
-        </link>
-        <updated>2020-11-03T07:48:52.000Z</updated>
-        <content type="html"><![CDATA[<p>Debian/Ubuntu系列</p>
-<p>方法一：</p>
-<p><code>sudo ifconfig eth0:0 192.168.1.63 up</code></p>
-<p>eth0网卡上创建一个叫eth0:0的虚拟网卡,他的地址是:192.168.1.63</p>
-<p>如果不想要这个虚拟网卡了,可以使用如下命令删除:</p>
-<p><code>sudo ifconfig eth0:0 down</code></p>
-<p>方法二：</p>
-<p><code>vim /etc/network/interfaces</code></p>
-<p>添加并保存例如以下内容：</p>
-<pre><code>auto eth0:0
+<!DOCTYPE html>
+<html>
 
-iface eth0:0 inet static
+<head>
+    <meta charset="utf-8" />
+<title>
+    Renzo&#39;s Blog
+</title>
+<!--[if lt IE 9]><script src="//cdn.bootcss.com/html5shiv/r29/html5.js"></script><![endif]-->
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<meta name="author" content="Renzo">
+<meta name="description" content="前路漫漫">
+<meta name="keywords" content="KTBFFH, Dota2">
+<script async src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+<link rel="stylesheet" href="https://elegancewang.github.io/CPlusPlusNote.github.io/styles/main.css" />
+<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://apps.bdimg.com/libs/jquery/1.7.1/jquery.min.js"></script>
 
-address 192.168.1.63
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/itjoker233/Gridea-theme-Chic/assets/media/css/style.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/itjoker233/Gridea-theme-Chic/assets/media/script/tocbot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/itjoker233/Gridea-theme-Chic/assets/media/script/script.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/itjoker233/Gridea-theme-Chic/assets/media/script/icon.min.js"></script>
+    
+            <script src="https://cdn.jsdelivr.net/gh/ITJoker233/ITJoker233.github.io@1.0.12/CDN/js/Card/prism.min.js"></script>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ITJoker233/ITJoker233.github.io@1.0.12/CDN/css/Card/prism.min.css" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css">
+            <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js"></script>
+            
+                <!--点击特效-->
+                <script src="https://cdn.jsdelivr.net/gh/ITJoker233/ITJoker233.github.io@latest/CDN/js/love.min.js"></script>
+                
+                    <script src="https://cdn.jsdelivr.net/gh/itjoker233/Gridea-theme-Chic@latest/assets/media/script/APlayer.min.js"></script>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+                    
+                        <!--CDN样式-->
+                        <script src="https://cdn.jsdelivr.net/gh/ITJoker233/ITJoker233.github.io@latest/CDN/js/hit-kounter-lc-0.3.0.js"></script>
+                        <script src="https://cdn1.lncld.net/static/js/av-min-1.5.0.js"></script>
+                        
+                            <script>
+                                (function() {
+                                    var bp = document.createElement('script');
+                                    var curProtocol = window.location.protocol.split(':')[0];
+                                    if (curProtocol === 'https') {
+                                        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+                                    } else {
+                                        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                                    }
+                                    var s = document.getElementsByTagName("script")[0];
+                                    s.parentNode.insertBefore(bp, s);
+                                })();
+                            </script>
+                            
+</head>
 
-netmask 255.255.255.0
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo">
+                <a href="https://elegancewang.github.io/CPlusPlusNote.github.io">
+                    Renzo&#39;s Blog
+                </a>
+            </div>
 
-network 192.168.1.1
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="https://elegancewang.github.io/CPlusPlusNote.github.io">
+                        首页
+                    </a>
+                    
+                    <a class="menu-item" href="https://elegancewang.github.io/CPlusPlusNote.github.io/archives">
+                        归档
+                    </a>
+                    
+                    <a class="menu-item" href="https://elegancewang.github.io/CPlusPlusNote.github.io/tags">
+                        标签
+                    </a>
+                    
+                    <a class="menu-item" href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/about">
+                        关于
+                    </a>
+                    
+                        <input id="switch_default" type="checkbox" class="switch_default">
+                        <label for="switch_default" class="toggleBtn"></label>
+            </div>
+            <form id="gridea-search-form" data-update="1604985025223" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
+            </form>
+        </div>
+    </nav>
 
-broadcast 192.168.1.255
-</code></pre>
-<p>重启网卡生效</p>
-<p><code>/etc/init.d/networking restart</code></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[TC(Traffic Control)]]></title>
-        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc/</id>
-        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc/">
-        </link>
-        <updated>2020-10-27T01:59:10.000Z</updated>
-        <content type="html"><![CDATA[<!-- more -->
+    
+        <nav class="navbar-mobile" id="nav-mobile">
+            <div class="container">
+                <div class="navbar-header">
+                    <div>
+                        <a href="https://elegancewang.github.io/CPlusPlusNote.github.io">
+                            Renzo&#39;s Blog
+                        </a>
+                        <!--en-->
+                        <a id="mobile-toggle-theme-en" class="a en">&nbsp;Dark</a>
+                        <!--zh-->
+                        <a id="mobile-toggle-theme-zh" class="a zh">&nbsp;&#x6697;&#x9ED1;</a>
+                    </div>
+                    <form id="gridea-search-form" data-update="1604985025223" action="/search/index.html">
+                        <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
+                    </form>
+                    <!--en-->
+                    <div class="menu-toggle" id="menu-toggle-en" onclick="mobileBtn()">&#9776; Menu</div>
+                    <!--zh-->
+                    <div class="menu-toggle" id="menu-toggle-zh" onclick="mobileBtn()">&#9776; &#x83DC;&#x5355;</div>
+
+                </div>
+                <div class="menu" id="mobile-menu">
+                    
+                        <a class="menu-item" href="https://elegancewang.github.io/CPlusPlusNote.github.io">
+                            首页
+                        </a>
+                        
+                        <a class="menu-item" href="https://elegancewang.github.io/CPlusPlusNote.github.io/archives">
+                            归档
+                        </a>
+                        
+                        <a class="menu-item" href="https://elegancewang.github.io/CPlusPlusNote.github.io/tags">
+                            标签
+                        </a>
+                        
+                        <a class="menu-item" href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/about">
+                            关于
+                        </a>
+                        
+                </div>
+            </div>
+        </nav>
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementById("menu-toggle-en");
+        var toggleMenu_zh = document.getElementById("menu-toggle-zh");
+
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.display != "none") {
+            if (toggleMenu.classList.contains("active")) {
+                toggleMenu.classList.remove("active")
+                mobileMenu.classList.remove("active")
+            } else {
+                toggleMenu.classList.add("active")
+                mobileMenu.classList.add("active")
+            }
+        } else if (toggleMenu_zh.display != "none") {
+            if (toggleMenu_zh.classList.contains("active")) {
+                toggleMenu_zh.classList.remove("active")
+                mobileMenu.classList.remove("active")
+            } else {
+                toggleMenu_zh.classList.add("active")
+                mobileMenu.classList.add("active")
+            }
+        }
+
+    }
+</script>
+            <div class="main">
+                <div class="container">
+                    <article class="post-wrap">
+                        <header class="post-header">
+                            <h1 class="post-title">
+                                TC(Traffic Control)
+                            </h1>
+                            
+                                    <!--zh-->
+                                    <div class="post-meta zh">
+                                        &#x4F5C;&#x8005;:
+                                        <a itemprop="author" rel="author" href="/">
+                                            Renzo's Blog
+                                        </a>
+                                        <span class="post-time">&#x65E5;&#x671F;: <a href="#">10-27-2020</a></span>
+                                        <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
+                                    href="#">38.6
+                                    &#x5206;&#x949F;</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">9814</a></span>
+                                        
+                                            <span class="post-category">&#x5206;&#x7C7B;:
+                                
+                                <a href="https://elegancewang.github.io/CPlusPlusNote.github.io/tag/linux/">Linux</a>
+                                
+                                <a href="https://elegancewang.github.io/CPlusPlusNote.github.io/tag/tc/">TC</a>
+                                
+                            </span>
+                                            
+                                                阅读量:
+                                                <span data-hk-page="current"> - </span>
+                                                
+                                    </div>
+                                    
+                        </header>
+                        
+                        <div class="post-content">
+                            <!-- more -->
 <p>Linux中的流量控制</p>
 <!-- more -->
 <h1 id="1-tc原理">1. TC原理</h1>
@@ -604,252 +756,279 @@ qdisc sfq 30: quantum 1514b
 <p>每次硬件层请求一个数据包来发送时，都会开启一个 weighted round robin （WRR）过程， 从优先级最高的 class 开始（注意，优先级越高对应的 priority number 越小）。</p>
 <p>优先级相同的 class 会作为一组，依次判断它们是否有数据要发送。</p>
 <p>下列参数控制 WRR 过程：</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[WebRTC 环境配置（Windows 平台）]]></title>
-        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/webrtc-huan-jing-pei-zhi/</id>
-        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/webrtc-huan-jing-pei-zhi/">
-        </link>
-        <updated>2020-09-16T00:40:46.000Z</updated>
-        <content type="html"><![CDATA[<p>万事开头难啊，webRTC配置过程中遇到的问题多种多样，有些问题很难搜索到，因此我记录下来供自己参考。</p>
-<h1 id="写在前面的话">写在前面的话</h1>
-<p>鉴于WebRTC更新太快，所以网上很多编译方法都失效了，所以如果你看到是几年前的文章，就没必要较真了。本文写作时间为2020年9月16日，WebRTC为当前最新版本。请诸君参考。（另，本人所在地为HK，因此不需要稳定的梯子，希望大家能找到稳定的梯子。）</p>
-<h1 id="1准备">1.准备</h1>
-<p>a) <strong>Win 10 64bit 1909</strong></p>
-<p>b) <strong>Visual Studio 2019 Community 16.7.30503.244</strong></p>
-<p>c) <strong>Windows 10 SDK</strong><br>
-Windows 10.0.19041.1<br>
-<img src="https://elegancewang.github.io/CPlusPlusNote.github.io/post-images/1600217267438.png" alt="" loading="lazy"></p>
-<p>d) <strong>Python</strong></p>
-<p>Python 3.8.5 64bit，编译过程中需添加到Path环境变量</p>
-<p>f) <strong>depot_tools</strong><br>
-depot_tools是包含下载、编译的相关工具，需要先下载并配置它，才能继续后面的操作。<br>
-下载地址:<a href="https://storage.googleapis.com/chrome-infra/depot_tools.zip">depot_tools</a></p>
-<p>下载后解压，并将解压好的depot_tools目录添加到path系统环境变量中，如下图所示：</p>
-<figure data-type="image" tabindex="1"><img src="https://elegancewang.github.io/CPlusPlusNote.github.io/post-images/1600218587975.png" alt="" loading="lazy"></figure>
-<h1 id="2-环境变量配置">2 环境变量配置</h1>
-<p>有大量的环境变量需要配置，如果在cmd中set需要保持该窗口。一般在系统环境变量编辑里比较简单方便。<br>
-最开始我的设置如下：</p>
-<pre><code>DEPOT_TOOLS_UPDATE=0                                 #不更新depot_tools
-DEPOT_TOOLS_WIN_TOOLCHAIN=0                          #编译时使用本机VS工具链
-GYP_MSVS_VERSION = 2019                              #指定VS版本
-GYP_MSVS_OVERRIDE_PATH = C:\Program Files (x86)\Microsoft Visual Studio\2019\Community  #vs安装路径，替换成自己的
-GYP_GENERATORS=msvs-ninja,ninja                      #使用ninja编译
 
-</code></pre>
-<p><strong>Error</strong><br>
-depot_tools/python3_bin_reldir.txt: No such file or directory<br>
-failed to determine Python version</p>
-<p>我认为是环境变量阻止了其在Windows下的引导，因此删去<code>DEPOT_TOOLS_UPDATE=0</code> 的环境变量即可.</p>
-<h1 id="3获取webrtc源码">3.获取WebRTC源码</h1>
-<p>接着执行<code>gclient</code>命令，安装编译需要用到的一些工具，比如git以及python。</p>
-<p>其他的环境变量我们已经在前文设置，无需通过cmd进行设置，这是为了我自己的方便，如果对于环境变量有要求，请在cmd自行设置，例：</p>
-<pre><code>set vs2019_install=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community
-set GYP_MSVS_OVERRIDE_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community 
-set GYP_GENERATORS=msvs-ninja,ninja
-# 告诉depot_tools使用我们本机的VS进行编译
-set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+                        </div>
+                        
+                            <div class="post-toc">
+                                <ul class="markdownIt-TOC">
+<li><a href="#1-tc%E5%8E%9F%E7%90%86">1. TC原理</a></li>
+<li><a href="#2-%E8%A7%84%E5%88%99">2. 规则</a>
+<ul>
+<li><a href="#21-%E9%98%9F%E5%88%97queues-%E5%92%8C%E6%8E%92%E9%98%9F%E8%A7%84%E5%88%99queueing-disciplines">2.1 队列（Queues） 和排队规则（Queueing Disciplines）</a></li>
+<li><a href="#22-simple-classless-qdisc%E7%AE%80%E5%8D%95-%E4%B8%8D%E5%88%86%E7%B1%BB%E6%8E%92%E9%98%9F%E8%A7%84%E5%88%99">2.2 Simple， classless qdisc（简单、不分类排队规则）</a>
+<ul>
+<li><a href="#221-pfifo_fast%E5%85%88%E5%85%A5%E5%85%88%E5%87%BA%E9%98%9F%E5%88%97">2.2.1 pfifo_fast（先入先出队列）</a></li>
+<li><a href="#2211-%E5%8F%82%E6%95%B0%E4%B8%8E%E7%94%A8%E6%B3%95">2.2.1.1 参数与用法</a></li>
+<li><a href="#222-tbftoken-bucket-filter%E4%BB%A4%E7%89%8C%E6%A1%B6%E8%BF%87%E6%BB%A4%E5%99%A8">2.2.2 TBF（Token Bucket Filter，令牌桶过滤器）</a>
+<ul>
+<li><a href="#2221-%E5%8F%82%E6%95%B0%E4%B8%8E%E7%94%A8%E6%B3%95">2.2.2.1 参数与用法</a></li>
+<li><a href="#2222-%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE">2.2.2.2 示例配置</a></li>
+</ul>
+</li>
+<li><a href="#223-sfqstochastic-fairness-queueing%E9%9A%8F%E6%9C%BA%E5%85%AC%E5%B9%B3%E6%8E%92%E9%98%9F">2.2.3 SFQ（Stochastic Fairness Queueing，随机公平排队）</a>
+<ul>
+<li><a href="#2231-%E5%8F%82%E6%95%B0%E4%B8%8E%E7%94%A8%E6%B3%95">2.2.3.1 参数与用法</a></li>
+<li><a href="#2232-%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE">2.2.3.2 示例配置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#23-%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE%E4%BD%95%E6%97%B6%E9%80%89%E6%8B%A9%E5%93%AA%E7%A7%8D%E9%98%9F%E5%88%97">2.3 使用建议：何时选择哪种队列？</a></li>
+<li><a href="#24-%E6%9C%AF%E8%AF%AD">2.4 术语</a></li>
+<li><a href="#25-classful-qdisc%E5%88%86%E7%B1%BB%E5%88%AB%E6%8E%92%E9%98%9F%E8%A7%84%E5%88%99">2.5 Classful qdisc（分类别排队规则）</a>
+<ul>
+<li><a href="#251-classful-qdisc-class-%E4%B8%AD%E7%9A%84-flow">2.5.1 Classful qdisc &amp; class 中的 flow</a></li>
+<li><a href="#252-qdisc-%E5%A4%A7%E5%AE%B6%E5%BA%ADroots-handles-siblings-and-parents">2.5.2 qdisc 大家庭：roots, handles, siblings and parents</a>
+<ul>
+<li><a href="#2521-%E5%A6%82%E4%BD%95%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8filters-%E5%AF%B9%E6%B5%81%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB">2.5.2.1 如何用过滤器（filters ）对流量进行分类</a></li>
+<li><a href="#2522-%E5%8C%85%E6%98%AF%E5%A6%82%E4%BD%95%E4%BB%8E-qdisc-%E5%87%BA%E9%98%9Fdequeue%E7%84%B6%E5%90%8E%E4%BA%A4%E7%BB%99%E7%A1%AC%E4%BB%B6%E7%9A%84">2.5.2.2 包是如何从 qdisc 出队（dequeue）然后交给硬件的</a></li>
+</ul>
+</li>
+<li><a href="#253-prio-qdisc%E4%BC%98%E5%85%88%E7%BA%A7%E6%8E%92%E9%98%9F%E8%A7%84%E5%88%99">2.5.3 PRIO qdisc（优先级排队规则）</a>
+<ul>
+<li><a href="#2531-%E5%8F%82%E6%95%B0%E4%B8%8E%E7%94%A8%E6%B3%95">2.5.3.1 参数与用法</a></li>
+<li><a href="#2532-%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE">2.5.3.2 示例配置</a></li>
+</ul>
+</li>
+<li><a href="#254-%E8%91%97%E5%90%8D%E7%9A%84-cbqclass-based-queueingqdisc">2.5.4  著名的 CBQ（Class Based Queueing）qdisc</a>
+<ul>
+<li><a href="#2541-cbq-shaping-%E8%AF%A6%E8%A7%A3">2.5.4.1 CBQ shaping 详解</a></li>
+<li><a href="#2542-cbq-classful-behaviour">2.5.4.2 CBQ classful behaviour</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
-</code></pre>
-<p>然后cd到要放源码的地方（要遵守前面说的磁盘要求），执行：</p>
-<pre><code>mkdir webrtc-checkout
-cd webrtc-checkout
-fetch --nohooks webrtc
-gclient sync
+                            </div>
+                            
+                                
+                                    
+                                            <!--zh-->
+                                            <section class="post-copyright zh">
+                                                <p class="copyright-item ">
+                                                    <span>&#x4F5C;&#x8005;:</span>
+                                                    <span>Renzo's Blog</span>
+                                                </p>
 
-</code></pre>
-<p>这一过程的时间比较长，包括源码以及一些测试的音视频文件资源等。如果没有稳定快速的梯子需要等待较长时间。</p>
-<p>如果因为网络等原因中断了，就再执行<code>gclient sync</code>。如果这一步一直卡着不动，可以执行<code>ctrl+c</code>，然后执行<code>gclient sync</code>。</p>
-<h1 id="4编译">4.编译</h1>
-<p>生成VS2019工程文件：</p>
-<pre><code>cd src
-gn gen --ide=vs out/Default
+                                                <p class="copyright-item">
+                                                    <span>&#x6C38;&#x4E45;&#x94FE;&#x63A5;:</span>
+                                                    <span><a href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc/">https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc/</a></span>
+                                                </p>
 
-</code></pre>
-<p>可以在src\out\Default\ 下得到 all.sln解决方案文件。</p>
-<p>如果不想使用默认编译参数，可以使用gn args out/Default --list查看当前编译参数，通过类似如下方式设置：<br>
-<code>gn gen --ide=vs out/Default --args=“use_rtti=true is_clang=false rtc_build_tools=false rtc_include_tests=false rtc_build_examples=false”</code></p>
-<p>接着执行编译命令：</p>
-<pre><code>ninja -C out/Default
-</code></pre>
-<h1 id="代码更新">代码更新</h1>
-<pre><code>git checkout master
-git pull origin master
-gclient sync
+                                                <p class="copyright-item">
+                                                    <span>&#x534F;&#x8BAE;:</span>
+                                                    <span>MIT License</span>
+                                                </p>
+                                            </section>
+                                            
+                                                
+                                                    
+                                                                    <!--Share-->
+                                                                    <span style="margin-right:15px">
+                        <i class="post-share"></i>
+                        <span>&#x5206;&#x4EAB;:</span>
+                                                                    <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc/"><i class="fa fa-qrcode"></i></a>
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc/&sharesource=qzone&title=TC(Traffic Control)&pics=https://elegancewang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1604985025223&summary="><i class="fa fa-qq"></i></a>
+                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc/&sharesource=weibo&title=TC(Traffic Control) + " - " + &pic="https://elegancewang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1604985025223 "><i class="fa fa-weibo "></i></a>
 
-</code></pre>
-<h1 id="引用webrtc库">引用WebRTC库</h1>
-<p>WebRTC编译后会在src\out\Default\obj目录下生成整个WebRTC工程的静态库：webrtc.lib，链接下这个就可以了。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[C++学习笔记]]></title>
-        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/learnC/</id>
-        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/learnC/">
-        </link>
-        <updated>2020-07-22T06:01:37.000Z</updated>
-        <content type="html"><![CDATA[<!-- more -->
-<h1 id="chapter-8">Chapter 8</h1>
-<p>指针、引用<br>
-<strong>指针</strong>—— 存储内存地址<br>
-<strong>变量</strong> ——占用空间、声明、初始化（否则值为随机）</p>
-<h2 id="81-运算符">8.1 运算符</h2>
-<h3 id="11-使用引用运算符获取变量地址">1.1 使用引用运算符（&amp;）获取变量地址</h3>
-<p>e.g. Varname —— 变量<br>
-&amp;Varname —— 存储该变量内存地址</p>
-<h3 id="12-使用接触引用运算符">1.2   使用接触引用运算符（*）</h3>
-<p>以此访问包含地址的值<br>
-e.g. 有合法指针——pData<br>
-那么该指针地址处存储的值可用 *pData 来获取</p>
-<h3 id="13-sizeof">1.3 sizeof()</h3>
-<pre><code>用于指针时，结果取决于编译器及针对的操作系统，与指针变量无关。
-</code></pre>
-<h2 id="82-动态内存分配">8.2 动态内存分配</h2>
-<h3 id="1-关键字new-delete-动态分配和释放内存">1. 关键字new &amp; delete 动态分配和释放内存</h3>
-<p><strong>new分配新的内存块，若成功，返回一个指针，指向新分配的内存，否则引发异常（使用时，指定数据类型分配内存）</strong><br>
-Type* Pointer = new Type;<br>
-Type* Pointer = new Type[ Num Elements ];<br>
-e.g.</p>
-<pre><code class="language-cpp">int * pNumber = new int;
-int * pNumber = new int[ 10 ];
-</code></pre>
-<p><em>注 ：请求分配内存并不保证请求能够得到满足，取决于系统状态机内存资源的可用性。</em><br>
-<strong>使用关键字 <strong>new</strong> 分配的内存最终使用对应的关键字 <strong>delete</strong> 释放</strong><br>
-Type* Pointer = new Type;<br>
-delete Pointer;<br>
-或<br>
-Type* Pointer = new Type[ Num Elements ];<br>
-delete [] Pointer;</p>
-<h3 id="2-递增-递减-运算符作用于指针的结果">2. 递增（++）、递减（--）运算符作用于指针的结果</h3>
-<p>对指针执行递增 / 递减， 指向的是内存中相邻的值，而不是相邻的字节（除非值的长度刚好1字节，例如char）<br>
-Type * pType = Address;<br>
-++pType --&gt; Adress + sizeof( Type )</p>
-<h3 id="3-关键字const作用于指针">3. 关键字const作用于指针</h3>
-<p>const指针有三种：<br>
-a ）指针直线的数据为常量，不可修改，但可以修改包含的地址（指针可指向其他地址）<br>
-b ) 指针包含地址为常量，不能修改，可以修改数据<br>
-c ) 最为严格的情况，地址及值均为常量，均不可修改，但更易于维护。</p>
-<h3 id="4-将指针传递给函数">4. 将指针传递给函数</h3>
-<p><em>将内存空间传递给函数，其中可包含值，可包含结果</em><br>
-注意传入的数据是否需要修改或者经过计算。</p>
-<h3 id="5-数组与指针">5. 数组与指针</h3>
-<p>可以将数组变量赋值给类型相同的指针。</p>
-<h2 id="83-常见错误">8.3 常见错误</h2>
-<h3 id="1内存泄露">1.内存泄露</h3>
-<p>常见原因是未正确释放内存</p>
-<h3 id="2指向无效的内存单元">2.指向无效的内存单元</h3>
-<p>无效指针</p>
-<h3 id="3悬浮指针">3.悬浮指针</h3>
-<p><em>亦可称之为迷途/失控指针</em><br>
-为便面此类问题，初始化/释放指针后将其置为NULL，并在解除引用前（使用关键字 ** * **）检查其是否有效。</p>
-<h2 id="84-编程实践">8.4 编程实践</h2>
-<p>Step1 初始化指针变量<br>
-step2 使用前判断指针是否为NULL——&gt;异常处理，在new（创建指针）失败时妥善退出<br>
-Step3 仅在其有效时使用<br>
-Step4 new之后必用关键字delete释放内存，且delete后不再访问该指针</p>
-<h2 id="85-引用">8.5 引用（&amp;）</h2>
-<p>引用是变量的别名（相应变量的的另一个名字，指向相同的内存单元）</p>
-<pre><code class="language-cpp">VarType Original = Value;
-VarType &amp; ReferenceVariable = Original;
+                                                                    </span>
+                                                                    
+                                                                        <div class="reward ">
+                                                                            <div class="reward-button ">&yen;
+                                                                                <span class="reward-code "> 
+                        <span class="alipay-code "> <img class="alipay-img " alt = "support " src="https://blog.itjoker.cn/alipay.jpg"><b>支付宝</b> </span>
+                                                                                <span class="wechat-code "> <img alt ="support " class="wechat-img " src="https://blog.itjoker.cn/wechat.jpg"><b>微信</b> </span> </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                            <!--zh-->
+                                                                            <section class="post-tags zh ">
+                                                                                <div>
+                                                                                    <span>&#x6807;&#x7B7E;:</span>
+                                                                                    <span class="tag ">
+                        
+                        
+                        <a href="https://elegancewang.github.io/CPlusPlusNote.github.io/tag/linux/">#
+                    Linux
+                        </a>
+                        
+                        <a href="https://elegancewang.github.io/CPlusPlusNote.github.io/tag/tc/">#
+                    TC
+                        </a>
+                        
+                            
+                                </span>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <a href="javascript:window.history.back();">
+                        &#x8FD4;&#x56DE;</a>
+                                                                                    <span>&dot;</span>
+                                                                                    <a href="#">&#x4E3B;&#x9875;</a>
+                                                                                </div>
+                                                                            </section>
 
-</code></pre>
-<h3 id="1引用的用处">1.引用的用处</h3>
-<p>避免了传参时因参数占用内存过大，复制时也会开销很大。</p>
-<h3 id="2-const-用于引用">2. const 用于引用</h3>
-<p>禁止通过引用修改其指向的变量的值。</p>
-<p>const引用参数不能作用于左值</p>
-<h3 id="3-按引用向函数传递参数">3. 按引用向函数传递参数</h3>
-<p>可避免将形参复制给形参，从而极大提高性能。然而，让被调用的函数直接使用调用函数栈时，确保被调用函数不能修改调用函数中的变量很重要。因此，可将引用声明为const</p>
-<h1 id="chapter-9-类和对象">Chapter 9 类和对象</h1>
-<h2 id="91-类和对象简述">9.1 类和对象简述</h2>
-<h3 id="1-类的声明">1.  类的声明</h3>
-<p>关键字 <strong>class</strong> 依次包含类名、成员属性、方法（属于类成员的函数）及结尾分号（<strong>;</strong>）<br>
-即通过关键字<strong>class</strong>创建数据类型，并<mark>封装</mark>属性。</p>
-<p>&quot;封装&quot; 将数据及使用它们的方法进行逻辑编组</p>
-<h3 id="2实例化对象">2.实例化对象</h3>
-<p>在使用时，根据类实例化一个对象，通过对象访问成员方法及属性。</p>
-<pre><code class="language-cpp">class Human
-{
-    string Name;
-    string DateofBirth;
+                                                                            
+                                                                                <!---->
+                                                                                <section class="post-nav">
+                                                                                    
+                                                                                        <a class="prev" rel="prev" href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/">
+                                                                                            Linux添加网卡
+                                                                                        </a>
+                                                                                        
+                                                                                            
+                                                                                                <a class="next" rel="next" href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/webrtc-huan-jing-pei-zhi/">
+                                                                                                    WebRTC 环境配置（Windows 平台）
+                                                                                                </a>
+                                                                                                
+                                                                                </section>
+                    </article>
+                </div>
+                
+                                            
+            </div>
+    </div>
+    </div>
+    </div>
+    
+    <div id="player"></div>
+    
+        <footer id="footer" class="footer">
+            <div class="copyright">
+                
+                        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+                            
+                                <b id="hitokoto"></b><br>
+                                
+                                        <svg viewBox="0 0 1024 1024" style="margin-left: 5px;margin-right: 5px;" version="1.0" width="8" height="8" class="my-face">
+            <path
+                d="M863.597631 513.574282l-271.33965-140.213484L729.783667 81.926656c3.583731-7.87141 7.167462-15.742819 7.167462-25.214109C736.887134 25.226908 708.345275 0.012799 672.635953 0.012799a63.611229 63.611229 0 0 0-39.293053 12.607055c-1.791866 1.59988-3.519736 3.19976-5.311602 3.19976L147.87531 418.925381a55.547834 55.547834 0 0 0-19.646527 47.356448c1.791866 17.278704 14.27093 33.021523 32.125591 42.492813l271.33965 141.749369L292.504463 945.221908c-12.479064 25.214109-1.791866 53.563983 23.166262 69.306802 10.751194 6.335525 23.230258 9.47129 35.709322 9.47129 16.062795 0 32.125591-4.735645 44.604655-15.742819l480.091993-403.297753a55.547834 55.547834 0 0 0 19.646526-47.228458 61.243407 61.243407 0 0 0-32.12559-44.156688z"
+                fill="#93b5cf"></path>
+        </svg>
+                                        Renzo&#39;s Blog &copy;Copyright
+                                            <script>
+                                                var date = new Date();
+                                                document.write("" + date.getFullYear());
+                                            </script>
+                                            | Powered by
+                                            <a href="https://coding.net" target="_blank">
+                                                Github
+                                            </a>
+            </div>
+            <div id="update" style="display:none;">
+                on
+            </div>
+            
+                <div id="version" style="display:none;">
+                    1.7.5
+                </div>
+                
+                    <script>
+                        var pat = '';
+                        
+                        document.write('<div id="home_path" style="display:none;">' + document.location.protocol + '//' + window.document.location.hostname + pat + '</div>')
+                    </script>
+        </footer>
+        
+                <script>
+                    
 
-    void Talk( string TexttoTalk );
-};
-</code></pre>
-<p>那么实例化一个对象Tom</p>
-<pre><code class="language-cpp">//方法一
-Human Tom;
+                    function LoadPlayer() {
+                        var music_array = [];
+                        
+                        music_array.push({
+                            name: '',
+                            url: '',
+                            artist: '',
+                            cover: '',
+                        });
+                        
+                        console.log(" MusicList: " + music_array);
+                        
+                        const ap = new APlayer({
+                            container: document.getElementById('player'),
+                            fixed: true,
+                            audio: music_array
+                        });
+                        
+                    }
+                    LoadPlayer();
+                    
+                    
+                    
+                    hitokoto();
+                    
+                    getStar();
+                    hljs.initHighlighting();
+                    console.clear();
+                    
+                    CheckVersion();
+                    
+                    var newDate = new Date();
+                    newDate.setTime(1604985025223);
+                    console.log(" Blog Update Time: " + newDate.toLocaleDateString());
+                    console.log("\n %c \u26a1Theme:Chic Author's Blog:https://blog.itjoker.cn  Write By ITJoker  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;");
+                </script>
+                
+                    <div id="tp-weather-widget" style="background: #666;display: flex;"></div>
+                    <script>
+                        (function(T, h, i, n, k, P, a, g, e) {
+                            g = function() {
+                                P = h.createElement(i);
+                                a = h.getElementsByTagName(i)[0];
+                                P.src = k;
+                                P.charset = "utf-8";
+                                P.async = 1;
+                                a.parentNode.insertBefore(P, a)
+                            };
+                            T["ThinkPageWeatherWidgetObject"] = n;
+                            T[n] || (T[n] = function() {
+                                (T[n].q = T[n].q || []).push(arguments)
+                            });
+                            T[n].l = +new Date();
+                            if (T.attachEvent) {
+                                T.attachEvent("onload", g)
+                            } else {
+                                T.addEventListener("load", g, false)
+                            }
+                        }(window, document, "script", "tpwidget", "//widget.seniverse.com/widget/chameleon.js"))
+                    </script>
+                    <script>
+                        var wearther_margin = "10px 10px";
+                        
+                        wearther_margin = "70px 5px";
+                        
+                        tpwidget("init", {
+                            "flavor": "bubble",
+                            "location": "WX4FBXXFKE4F",
+                            "geolocation": "enabled",
+                            "position": "bottom-left",
+                            "margin": wearther_margin,
+                            "language": "zh-chs",
+                            "unit": "c",
+                            "theme": "chameleon",
+                            "uid": "UFC977E1C7",
+                            "hash": "213ad798bc472dc365da3a9d4a9ff115"
+                        });
+                        tpwidget("show");
+                    </script>
+                    
+        </div>
+</body>
+<script>
+    scroll();
+</script>
 
-//方法二
-Human* pAnotherHuman = new Human( );
-delete pAnotherHuman;
-</code></pre>
-<h3 id="3通过句点运算符访问成员">3.通过句点运算符（.）访问成员</h3>
-<p>句点运算符（.）用于访问对象的属性。这同样适用于方法。</p>
-<pre><code class="language-cpp">
-Human Tom;
-
-Tom. DateofBirth = &quot;1970&quot; ;
-
-Huamn* pTom = new Human();
-(*pTom).IntroduceSelf();//使用间接运算符（*）获取对象，再使用句点运算符来访问成员。
-</code></pre>
-<h3 id="4-使用指针运算符访问成员-">4. 使用指针运算符访问成员（-&gt;）</h3>
-<p>若对象使用new实例化或有指向对象的指针，则可以使用 **指针运算符（-&gt;）**来访问成员属性和方法。</p>
-<h1 id="chapter-11">Chapter 11</h1>
-<p>**</p>
-<h2 id="111-多态基础">11.1.  多态基础</h2>
-<h3 id="11">1.1</h3>
-<p><strong>类之间存在层次结构，类是通过继承相关联时，通过多态来表示。</strong><br>
-多态意味着调用成员函数时，根据函数的对象类型执行不同的方法。（而不是调用预设的基类中的函数方法），即表现实际类型。</p>
-<h3 id="12">1.2</h3>
-<p><strong>使用虚函数实现多态行为</strong></p>
-<p>将基类中方法声明为虚函数，使用关键字 virtual， 确保编译器调用覆盖版本（子类、派生类）。</p>
-<p><mark>多态行为</mark> 将派生类对象视为几类对象，并执行派生类的函数（方法）实现。</p>
-<h3 id="13-为何需要虚构造函数">1.3 为何需要<mark>虚构造函数</mark></h3>
-<p>除了需要使用派生类对象，还需要避免计算机资源未释放、内存泄露等问题（即将实例化的派生类对象，将其值赋给基类当做指针，并通过该指针调用 delete， 将不会调用派生类的析构函数）</p>
-<pre><code>												**⬇**
-</code></pre>
-<p>那么将析构函数声明为虚函数，确保通过基类指针调用delete时，不会调用派生类析构函数</p>
-<pre><code class="language-cpp">class Base
-{
-public:
-	virtual ~Base()		
-};
-
-</code></pre>
-<h3 id="auto-关键字">auto 关键字</h3>
-<p>利用auto关键字，通过编译器检查变量的初始值，并将该变量类型设置为该返回值的类型。能够简化编码工作。</p>
-<pre><code class="language-cpp">std::vector&lt;int&gt; MyNumbers;
-	//常规
-	for (vector&lt;int&gt;::const_iterator Iterator =  MyNumbers.begin(); 
-		Iterator &lt; MyNumbers.end(); ++Iterator )
-	std::cout &lt;&lt; * Iterator&lt;&lt; &quot; &quot;;
-	//利用auto关键字
-		for (auto Iterator =  MyNumbers.begin(); 
-		Iterator &lt; MyNumbers.end(); ++Iterator )
-	std::cout &lt;&lt; * Iterator&lt;&lt; &quot; &quot;;
-</code></pre>
-<p>**</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[关于]]></title>
-        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/about/</id>
-        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/about/">
-        </link>
-        <updated>2019-01-25T11:09:48.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝 #KTBFFH 💙 CHELSEA</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<p>重新开始学习计算机语言，</p>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<p>CHELSEA、DOTA</p>
-<h2 id="联系我呀">📬 联系我呀</h2>
-<p>githubwrz@163.com</p>
-]]></content>
-    </entry>
-</feed>
+</html>
