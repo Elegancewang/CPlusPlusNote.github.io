@@ -86,7 +86,7 @@
                         <input id="switch_default" type="checkbox" class="switch_default">
                         <label for="switch_default" class="toggleBtn"></label>
             </div>
-            <form id="gridea-search-form" data-update="1604978788451" action="/search/index.html">
+            <form id="gridea-search-form" data-update="1604979309583" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
             </form>
         </div>
@@ -105,7 +105,7 @@
                         <!--zh-->
                         <a id="mobile-toggle-theme-zh" class="a zh">&nbsp;&#x6697;&#x9ED1;</a>
                     </div>
-                    <form id="gridea-search-form" data-update="1604978788451" action="/search/index.html">
+                    <form id="gridea-search-form" data-update="1604979309583" action="/search/index.html">
                         <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
                     </form>
                     <!--en-->
@@ -178,9 +178,9 @@
                                         </a>
                                         <span class="post-time">&#x65E5;&#x671F;: <a href="#">10-27-2020</a></span>
                                         <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
-                                    href="#">28.8
+                                    href="#">28.9
                                     &#x5206;&#x949F;</a></span>
-                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">7442</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">7450</a></span>
                                         
                                             <span class="post-category">&#x5206;&#x7C7B;:
                                 
@@ -229,7 +229,7 @@
 <p>与 classless qdisc 对应的是 classful qdisc，即<strong>有类别（或称分类别）排队规则</strong>，后者是一个<strong>排队规则中又包含其他排队规则</strong>（qdisc-containing-qdiscs）！😮 先理解了 classless qdisc，才能理解 classful qdisc。<br>
 目前最常用的 classless qdisc 是 <code>pfifo_fast qdisc</code>，这也是默认排队规则。 这也解释了为什么这些高级功能如此健壮：本质上来说，它们只不过是“另一个队列”而 已（nothing more than ‘just another queue’）。<br>
 每种队列都有自己的优缺点。其中一些可能测试的并不全面。</p>
-<h2 id="23-pfifo_fast先入先出队列">2.3 pfifo_fast（先入先出队列）</h2>
+<h3 id="221-pfifo_fast先入先出队列">2.2.1 pfifo_fast（先入先出队列）</h3>
 <p>如名字所示，这是一个先入先出队列（First In, First Out），因此对所有包都一视同仁。</p>
 <p>pfifo_fast 有<strong>三个所谓的 “band”</strong>（可理解为三个队列），编号分别为 0、1、2：</p>
 <ul>
@@ -238,7 +238,7 @@
 <li>内核会检查<strong>数据包的 TOS 字段</strong>，将**“最小延迟”的包放到 band 0**。</li>
 </ul>
 <p>不要将 <code>pfifo_fast qdisc</code> 与后面介绍的 <code>PRIO qdisc</code> 混淆，后者是 classful 的！ 虽然二者行为类似，但 <strong><code>pfifo_fast</code> 是无类别</strong>的，这意味你<strong>无法通过 <code>tc</code> 命令向 <code>pfifo_fast</code> 内添加另一个 qdisc。</strong></p>
-<h3 id="231-参数与用法">2.3.1 参数与用法</h3>
+<h3 id="2211-参数与用法">2.2.1.1 参数与用法</h3>
 <p><code>pfifo_fast qdisc</code> 默认配置是写死的（the hardwired default），因此<strong>无法更改</strong>。</p>
 <p>下面介绍这份写死的配置是什么样的。</p>
 <ul>
@@ -308,7 +308,7 @@
 <li><code>txqueuelen</code><br>
 发送队列长度，是一个网络接口（interface）参数，可以用 <code>ifconfig</code> 命令设置。例 如，<code>ifconfig eth0 txqueuelen 10</code>。<br>
 <code>tc</code> 命令无法修改这个值。
-<h2 id="24-tbftoken-bucket-filter令牌桶过滤器">2.4 TBF（Token Bucket Filter，令牌桶过滤器）</h2>
+<h3 id="222-tbftoken-bucket-filter令牌桶过滤器">2.2.2 TBF（Token Bucket Filter，令牌桶过滤器）</h3>
 TBF 是一个简单 qdisc，对于没有超过预设速率的流量直接透传，但也能容忍超过预 设速率的短时抖动（short bursts in excess of this rate）。<br>
 TBF 非常简洁，对网络和处理器都很友好（network- and processor friendly）。 <strong>如果只是想实现接口限速，那 TBF 是第一选择</strong>。</li>
 </ul>
@@ -322,7 +322,8 @@ TBF 非常简洁，对网络和处理器都很友好（network- and processor fr
 <p>当一个包到来时，会从 bucket 中拿到一个 token，然后收集这个包的信息，最后从 bucket 中删除这个 token。 这个算法和 token flow、data flow 结合起来，会产生三种可能的场景：</p>
 <ol>
 <li><strong>数据速率 == token 速率</strong>：每个包都能找到一个对应的token，然后直接从队列出去，没有延时（delay）。</li>
-<li><strong>数据速率 &lt; token 速率</strong>：正常到来的数据都能及时发送出去，然后删除一个 token。 由于 token 速率大于数据速率，会<strong>产生 bucket 积压</strong>，极端情况会将 bucket 占满。<strong>如果数据速率突然高于 token 速率，就可以消耗这些积压的 token</strong> 。因此积压的 token 有<strong>一个额外好处</strong>：<strong>能够容忍短时数据速率抖动（burst）</strong>。</li>
+<li><strong>数据速率 &lt; token 速率</strong>：正常到来的数据都能及时发送出去，然后删除一个 token。 由于 token 速率大于数据速率，会<strong>产生 bucket 积压</strong>，极端情况会将 bucket 占满。<strong>如果数据速率突然高于 token 速率，就可以消耗这些积压的 token</strong> 。因此积压的 token<br>
+有<strong>一个额外好处</strong>：<strong>能够容忍短时数据速率抖动（burst）</strong>。</li>
 <li><strong>数据速率 &gt; token 速率</strong>：token 很快就会<strong>用完</strong>，然后** TBF 会关闭（throttle ）一会**。这种 情况称为 <strong>overlimit（超过限制）</strong>。如果包还是源源不断地到来，就会产生<strong>丢包</strong>。</li>
 </ol>
 <p>第三种非常重要，因为它使我们能够<strong>对数据可用的带宽进行整形</strong>（administratively shape the bandwidth）。</p>
@@ -330,7 +331,7 @@ TBF 非常简洁，对网络和处理器都很友好（network- and processor fr
 <blockquote>
 <p>注意：在实际的实现中，token 是基于字节数，而不是包数。</p>
 </blockquote>
-<h3 id="241-参数与用法">2.4.1 参数与用法</h3>
+<h4 id="2221-参数与用法">2.2.2.1 参数与用法</h4>
 <p>虽然通常情况下并不需要修改 TBF 配置参数，但我们还是可以看一下有哪些。</p>
 <p>首先，永远可用的（always available）参数：</p>
 <ul>
@@ -368,7 +369,7 @@ TBF 非常简洁，对网络和处理器都很友好（network- and processor fr
 <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mi>M</mi><mi>b</mi><mi>i</mi><mi>t</mi><mi mathvariant="normal">/</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">1Mbit/s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">b</span><span class="mord mathdefault">i</span><span class="mord mathdefault">t</span><span class="mord">/</span><span class="mord mathdefault">s</span></span></span></span> 的 peakrate 通常并不是很有用，因为实际中的带宽要远大于此。实现更高 peakrate 的一种方式是：每个 timer tick 发送多个包，在效果上就好像我们创建 了第二个 bucket！</p>
 <p>这第二个 bucket 默认只有一个包（defaults to a single packet），完全算不上一个 bucket。</p>
 <p>计算最大可能的 peakrate 时，用 MTU 乘以 100（更准确地说，乘以 HZ 数，例如 Intel 上是 100，Alpha 上是 1024）。</p>
-<h3 id="242-示例配置">2.4.2 示例配置</h3>
+<h4 id="2222-示例配置">2.2.2.2 示例配置</h4>
 <p>一个简单但非常有用的配置：</p>
 <pre><code class="language-linux">$ tc qdisc add dev ppp0 root tbf rate 220kbit latency 50ms burst 1540
 </code></pre>
@@ -376,14 +377,14 @@ TBF 非常简洁，对网络和处理器都很友好（network- and processor fr
 <p>这是因为上传的数据会被缓存到 modem 的 queue 里，而且缓存的数据量很大（以提升吞吐） 。但这并不是期望的，你希望的是 queue 不要太大，这样能保证交换式数据的实时性，因 此能在上传数据过程中同时做其他事情。</p>
 <p>上面的配置<strong>将发送速率降低到了 modem 不会对数据进行排队缓存（queuing）的水平 —— 此时 queue 前移到了 Linux 中</strong>，而我们可以将它控制在一个合理的范围内。</p>
 <p>这里的 220kbit 是<strong>上行链路的真实带宽乘以一个系数</strong>，如果你的 modem 足 够快，可以将 burst 调大一些。</p>
-<h2 id="25-sfqstochastic-fairness-queueing随机公平排队">2.5 SFQ（Stochastic Fairness Queueing，随机公平排队）</h2>
+<h3 id="223-sfqstochastic-fairness-queueing随机公平排队">2.2.3 SFQ（Stochastic Fairness Queueing，随机公平排队）</h3>
 <p>随机公平排队（SFQ）是公平排队算法族的一个简单实现。相比其他算法，<strong>SFQ 精准性要差 一些</strong>，但它<strong>所需的计算量也更少</strong>，而<strong>结果几乎是完全公平</strong>的（almost perfectly fair）。</p>
 <p><strong>SFQ 中的核心是 conversion（会话）或 flow（流）</strong>，大部分情况下都对应一个 TCP session 或 UDP stream。<strong>每个 conversion 对应一个 FIFO queue</strong>，然后将流量分到不 同 queue。发送数据时，按照 round-robin 方式，每个 session 轮流发送。</p>
 <p>这种机制会产生非常公平的结果，不会因为单个 conversion 太大而把其他 conversion 的带宽都 挤占掉。SFQ 被称为**“随机的”（stochastic）<strong>是因为</strong>它其实并没有为每个 session 分配一个 queue**，而是<strong>用算法将流量哈希到了一组有限的 queue</strong>。</p>
 <p>但这里会出现另一个<strong>问题</strong>：<strong>多个 session 会可能会哈希到同一个 bucket（哈希槽）</strong>， 进而<strong>导致每个 session 的 quota 变小</strong>，<strong>达不到预期的整流带宽（或速度）</strong>。为避免这个 问题过于明显，<strong>SFQ 会不断变换它使用的哈希算法</strong>，最终<strong>任何两个会话冲突的持续时间都不会很长</strong>，只会有几秒钟。</p>
 <p><strong>SFQ 只有在实际出向带宽已经非常饱和的情况下才有效</strong>，这一点非常重要！否则， Linux 机器上就不存在 queue，因此也就没用效果。稍后会看到如<strong>何将 SFQ 与其他 qdisc 相结合来实现一般情况下的公平排队</strong>。</p>
 <p>说的更明确一点：<strong>没用配套的整流配置的话，单纯在（连接 modem 的）以太网接口上配 置SFQ 是毫无意义的。</strong></p>
-<h3 id="251-参数与用法">2.5.1 参数与用法</h3>
+<h4 id="2231-参数与用法">2.2.3.1 参数与用法</h4>
 <p>SFQ 大部分情况下默认参数就够了，</p>
 <p>-perturb</p>
 <p>每隔多少秒就重新配置哈希算法。如果这个参数没设，哈希算法就永远不会重新配置。 建议显式设置这个参数，不要为空。<strong>10s 可能是个不错的选择</strong>。</p>
@@ -391,7 +392,7 @@ TBF 非常简洁，对网络和处理器都很友好（network- and processor fr
 <p>在轮到下一个 queue 发送之前，当前 queue 允许出队（dequeue）的最大字节数。默认是 一个 MTU。不建议设置为小于 MTU 的值。</p>
 <p>-limit</p>
 <p>SFQ 能缓存的最大包数（超过这个阈值将导致丢包）。</p>
-<h3 id="252-示例配置">2.5.2 示例配置</h3>
+<h4 id="2232-示例配置">2.2.3.2 示例配置</h4>
 <p>如果你有一个带宽已经饱和的网络设备，例如一个电话调制解调器（phone modem），那下 面的配置有助于提高公平性：</p>
 <pre><code class="language-linux">$ tc qdisc add dev ppp0 root sfq perturb 10
 
@@ -404,7 +405,7 @@ qdisc sfq 800c: dev ppp0 quantum 1514b limit 128p flows 128/1024 perturb 10sec
 -<code>limit 128p</code>：最大缓存 128 个包<br>
 -<code>flows 128/1024</code>：这个 sfq 有 1024 个哈希槽（hash buckets），其中 128 个当前有 数据待发送。<br>
 -<code>perturb 10sec</code>：每隔 10s 换一次哈希算法。</p>
-<h2 id="26-使用建议何时选择哪种队列">2.6 使用建议：何时选择哪种队列？</h2>
+<h2 id="23-使用建议何时选择哪种队列">2.3 使用建议：何时选择哪种队列？</h2>
 <p>总结起来，上面几种都是简单的 qdisc，通过重排序（reordering）、降速（slowing）或 丢包（dropping）来实现流量管理。</p>
 <p>选择使用哪种 qdisc 时，下面几点可供参考。其中提到了几种在第 14 章才会介绍到的 qdisc。</p>
 <p>-<strong>单纯对出向流量限速（slow down outgoing traffic）</strong>，推荐使用** TBF**。如果是 针对大带宽进行限速，需要将 bucket 调大。</p>
@@ -421,7 +422,7 @@ qdisc sfq 800c: dev ppp0 quantum 1514b limit 128p flows 128/1024 perturb 10sec
 <li>如果你不需要整形，只是想看看网络接口（interface）是否过载（so loaded that it has to queue）， 使用 <code>pfifo queue</code>（注意不是 <code>pfifo_fast</code>）。pfifo 内部没有 bands，但会记录 backlog 的大小。</li>
 <li>最后 —— 你还可以尝试“社会学整形”（”social shaping”）。有时候一些问题是无法单纯 用技术解决的。用户会对技术限制充满敌意。和气地对别人说几句好话，也许你需要的 带宽就解决了。</li>
 </ul>
-<h2 id="27-术语">2.7 术语</h2>
+<h2 id="24-术语">2.4 术语</h2>
 <p>为方便理解接下来更复杂的配置，我们需要先引入一些概念。由于这项技术本身比较复杂， 发展也还处在较为早期的阶段，因此大家可能会用不同的术语描述同一样东西。</p>
 <p>下列术语大体上来自 <a href="https://www.ietf.org/id/draft-ietf-diffserv-model-06.txt">draft-ietf-diffserv-model-06.txt, An Informal Management Model for Diffserv Routers</a>。想进一步了解一些术语的定义，可参考这份文档。</p>
 <p>我们接下来会用到下列术语：</p>
@@ -508,7 +509,7 @@ Thanks to Jamal Hadi Salim for this ASCII representation.
 <p>Egress Classifier 中会用到很多 qdisc。<strong>默认情况下只有一个</strong>：<strong><code>pfifo_fast</code> qdisc</strong> ，它永远会接收包，这称为“入队”（”enqueueing”）。</p>
 <p>此时包位于 qdisc 中了，等待内核召唤，然后通过网络接口（network interface）发送出去。 这称为“出队”（”dequeueing”）。</p>
 <p>以上画的是单网卡的情况。<strong>在多网卡的情况下，每个网卡都有自己的 ingress 和 egress hooks</strong>。</p>
-<h2 id="28-classful-qdisc分类别排队规则">2.8 Classful qdisc（分类别排队规则）</h2>
+<h2 id="25-classful-qdisc分类别排队规则">2.5 Classful qdisc（分类别排队规则）</h2>
 <p>如果想<strong>对不同类型的流量做不同处理</strong>，那 classful qdisc 非常有用。其中一种是 CBQ（ Class Based Queueing，基于类别的排队），由于这种类型的 qdisc 使用太广泛了，导致 大家将广义上基于类别的排队等同于 CBQ（identify queueing with classes solely with CBQ），但实际并非如此。</p>
 <p><strong>CBQ 只是其中最古老 —— 也是最复杂 —— 的一种</strong>。它的行为有时可能在你的意料之外。 那些钟爱 “sendmail effect” 的人可能感到震惊。</p>
 <blockquote>
@@ -516,12 +517,12 @@ Thanks to Jamal Hadi Salim for this ASCII representation.
 Any complex technology which doesn’t come with documentation must be the best available.</p>
 </blockquote>
 <p>接下来介绍更多关于 CBQ 及其类似 qdisc 的信息。</p>
-<h3 id="281-classful-qdisc-class-中的-flow">2.8.1 Classful qdisc &amp; class 中的 flow</h3>
+<h3 id="251-classful-qdisc-class-中的-flow">2.5.1 Classful qdisc &amp; class 中的 flow</h3>
 <p>当流量进入一个 classful qdisc 时，该 qdisc 需要将其发送到内部的某个 class —— 即 <strong>需要对这个包进行“分类”</strong>。而要这个判断过程，，实际上是<strong>查询所谓的“过滤器”</strong>（ ‘filters’）。<strong>过滤器是在 qdisc 中被调用的，而不是其他地方</strong>，理解一点非常重要！</p>
 <p><strong>过滤器返回一个判决结果给 qdisc，qdisc 据此将包 enqueue 到合适的 class</strong>。 每个 subclass 可能会进一步执行其他 filters，以判断是否需要进一步处理。如果没有 其他过滤器，这个 class 将把包 enqueue 到它自带的 qdisc。</p>
 <p><strong>除了能包含其他 qdisc，大部分 classful qdisc 还会执行流量整形</strong>。这对包调 度（packet scheduling，例如，基于 SFQ）和速率控制（rate control）都非常有用。 当高速设备（例如，以太网）连接到一个低速设备（例如一个调制解调器）时，会用到这个 功能。</p>
 <p><strong>如果只运行 SFQ，那将什么事情都不会发生，因为包会无延迟地进入和离开你的路由 器：网卡的发送速度要远大于真实的链路速度。瓶颈不在主机中，就无法用“队列”（queue ）来调度这些流量。</strong></p>
-<h3 id="282-qdisc-大家庭roots-handles-siblings-and-parents">2.8.2 qdisc 大家庭：roots, handles, siblings and parents</h3>
+<h3 id="252-qdisc-大家庭roots-handles-siblings-and-parents">2.5.2 qdisc 大家庭：roots, handles, siblings and parents</h3>
 <ul>
 <li>每个接口都有一个 egress “root qdisc”。默认情况下，这个 root qdisc 就是前 面提到的 classless pfifo_fast qdisc。</li>
 <li>每个 qdisc 和 class 都会分配一个相应的 handle（句柄），可以指定 handle 对 qdisc 进行配置。</li>
@@ -571,7 +572,7 @@ ID 格式 `&lt;major&gt;:&lt;minor&gt;`，`major` 和 `minor` 都是 16 进制�
 
 译者注。
 </code></pre>
-<h4 id="2821-如何用过滤器filters-对流量进行分类">2.8.2.1 如何用过滤器（filters ）对流量进行分类</h4>
+<h4 id="2521-如何用过滤器filters-对流量进行分类">2.5.2.1 如何用过滤器（filters ）对流量进行分类</h4>
 <p>综上，一个典型的 handle 层级如下：</p>
 <pre><code class="language-code">                     1:   root qdisc
                       |
@@ -596,7 +597,7 @@ ID 格式 `&lt;major&gt;:&lt;minor&gt;`，`major` 和 `minor` 都是 16 进制�
 <pre><code class="language-c">1: -&gt; 12:2
 </code></pre>
 <p>在这种情况下，attach 到 root qdisc 的 filter 决定直接将包发给 12:2。</p>
-<h4 id="2822-包是如何从-qdisc-出队dequeue然后交给硬件的">2.8.2.2 包是如何从 qdisc 出队（dequeue）然后交给硬件的</h4>
+<h4 id="2522-包是如何从-qdisc-出队dequeue然后交给硬件的">2.5.2.2 包是如何从 qdisc 出队（dequeue）然后交给硬件的</h4>
 <p>当内核决定从 qdisc dequeue packet 交给接口（interface）发送时，它会</p>
 <pre><code>1. 向 root qdisc `1:` 发送一个 dequeue request
 2. `1:` 会将这个请求转发给 `1:1`，后者会进一步向下传递，转发给 `10:`、`11:`、`12:`
@@ -605,9 +606,8 @@ ID 格式 `&lt;major&gt;:&lt;minor&gt;`，`major` 和 `minor` 都是 16 进制�
 <p><strong>在这个例子中，内核需要遍历整棵树，因为只有 <code>12:2</code> 中有数据包。</strong></p>
 <p>简单来说，<strong>嵌套类（nested classes）只会和它们的 parent qdiscs 通信，而永远不会直 接和接口交互</strong>。<strong>内核只会调用 root qdisc 的 <code>dequeue()</code> 方法</strong>！</p>
 <p>最终结果是，<strong>classes dequeue 的速度永远不会超过它们的 parents 允许的速度</strong>。而这正 是我们所期望的：这样就能在内层使用一个 SFQ 做纯调度，它不用做任何整形的工作 ；然后在外层使用一个整形 qdisc 专门负责整形。</p>
-<h3 id="283">2.8.3</h3>
-<p>PRIO qdisc（优先级排队规则）<br>
-PRIO qdisc 实际上不会整形，只会根据设置的过滤器对流量进行分类。</p>
+<h3 id="253-prio-qdisc优先级排队规则">2.5.3 PRIO qdisc（优先级排队规则）</h3>
+<p><strong>PRIO qdisc 实际上不会整形，只会根据设置的过滤器对流量进行分类。</strong></p>
 <p>可以将 PRIO qdisc 理解为 pfifo_fast qdisc 的升级版，它也有多个 band，但 每个 band 都是一个独立的 class，而不是简单的 FIFO。</p>
 <p>当一个包 enqueue 到 PRIO qdisc 之后，它会根据设置的 filters 选择一个 class ，并将包送到这个 class。默认情况下会创建三个 class。每个 class 默认情况下都包含一 个纯 FIFO qdisc，没有其他内部结构，但你可以用其他类型的 qdisc 替换掉 FIFO。</p>
 <p>当从 PRIO qdisc 取出（dequeue）一个包时，会先尝试 :1。只有 lower bands/classes 没有数据包可取时，才会尝试 higher classes。</p>
@@ -625,36 +625,36 @@ PRIO qdisc 实际上不会整形，只会根据设置的过滤器对流量进行
 <li><a href="#2-%E8%A7%84%E5%88%99">2. 规则</a>
 <ul>
 <li><a href="#21-%E9%98%9F%E5%88%97queues-%E5%92%8C%E6%8E%92%E9%98%9F%E8%A7%84%E5%88%99queueing-disciplines">2.1 队列（Queues） 和排队规则（Queueing Disciplines）</a></li>
-<li><a href="#22-simple-classless-qdisc%E7%AE%80%E5%8D%95-%E4%B8%8D%E5%88%86%E7%B1%BB%E6%8E%92%E9%98%9F%E8%A7%84%E5%88%99">2.2 Simple， classless qdisc（简单、不分类排队规则）</a></li>
-<li><a href="#23-pfifo_fast%E5%85%88%E5%85%A5%E5%85%88%E5%87%BA%E9%98%9F%E5%88%97">2.3 pfifo_fast（先入先出队列）</a>
+<li><a href="#22-simple-classless-qdisc%E7%AE%80%E5%8D%95-%E4%B8%8D%E5%88%86%E7%B1%BB%E6%8E%92%E9%98%9F%E8%A7%84%E5%88%99">2.2 Simple， classless qdisc（简单、不分类排队规则）</a>
 <ul>
-<li><a href="#231-%E5%8F%82%E6%95%B0%E4%B8%8E%E7%94%A8%E6%B3%95">2.3.1 参数与用法</a></li>
+<li><a href="#221-pfifo_fast%E5%85%88%E5%85%A5%E5%85%88%E5%87%BA%E9%98%9F%E5%88%97">2.2.1 pfifo_fast（先入先出队列）</a></li>
+<li><a href="#2211-%E5%8F%82%E6%95%B0%E4%B8%8E%E7%94%A8%E6%B3%95">2.2.1.1 参数与用法</a></li>
+<li><a href="#222-tbftoken-bucket-filter%E4%BB%A4%E7%89%8C%E6%A1%B6%E8%BF%87%E6%BB%A4%E5%99%A8">2.2.2 TBF（Token Bucket Filter，令牌桶过滤器）</a>
+<ul>
+<li><a href="#2221-%E5%8F%82%E6%95%B0%E4%B8%8E%E7%94%A8%E6%B3%95">2.2.2.1 参数与用法</a></li>
+<li><a href="#2222-%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE">2.2.2.2 示例配置</a></li>
 </ul>
 </li>
-<li><a href="#24-tbftoken-bucket-filter%E4%BB%A4%E7%89%8C%E6%A1%B6%E8%BF%87%E6%BB%A4%E5%99%A8">2.4 TBF（Token Bucket Filter，令牌桶过滤器）</a>
+<li><a href="#223-sfqstochastic-fairness-queueing%E9%9A%8F%E6%9C%BA%E5%85%AC%E5%B9%B3%E6%8E%92%E9%98%9F">2.2.3 SFQ（Stochastic Fairness Queueing，随机公平排队）</a>
 <ul>
-<li><a href="#241-%E5%8F%82%E6%95%B0%E4%B8%8E%E7%94%A8%E6%B3%95">2.4.1 参数与用法</a></li>
-<li><a href="#242-%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE">2.4.2 示例配置</a></li>
+<li><a href="#2231-%E5%8F%82%E6%95%B0%E4%B8%8E%E7%94%A8%E6%B3%95">2.2.3.1 参数与用法</a></li>
+<li><a href="#2232-%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE">2.2.3.2 示例配置</a></li>
 </ul>
 </li>
-<li><a href="#25-sfqstochastic-fairness-queueing%E9%9A%8F%E6%9C%BA%E5%85%AC%E5%B9%B3%E6%8E%92%E9%98%9F">2.5 SFQ（Stochastic Fairness Queueing，随机公平排队）</a>
-<ul>
-<li><a href="#251-%E5%8F%82%E6%95%B0%E4%B8%8E%E7%94%A8%E6%B3%95">2.5.1 参数与用法</a></li>
-<li><a href="#252-%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE">2.5.2 示例配置</a></li>
 </ul>
 </li>
-<li><a href="#26-%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE%E4%BD%95%E6%97%B6%E9%80%89%E6%8B%A9%E5%93%AA%E7%A7%8D%E9%98%9F%E5%88%97">2.6 使用建议：何时选择哪种队列？</a></li>
-<li><a href="#27-%E6%9C%AF%E8%AF%AD">2.7 术语</a></li>
-<li><a href="#28-classful-qdisc%E5%88%86%E7%B1%BB%E5%88%AB%E6%8E%92%E9%98%9F%E8%A7%84%E5%88%99">2.8 Classful qdisc（分类别排队规则）</a>
+<li><a href="#23-%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE%E4%BD%95%E6%97%B6%E9%80%89%E6%8B%A9%E5%93%AA%E7%A7%8D%E9%98%9F%E5%88%97">2.3 使用建议：何时选择哪种队列？</a></li>
+<li><a href="#24-%E6%9C%AF%E8%AF%AD">2.4 术语</a></li>
+<li><a href="#25-classful-qdisc%E5%88%86%E7%B1%BB%E5%88%AB%E6%8E%92%E9%98%9F%E8%A7%84%E5%88%99">2.5 Classful qdisc（分类别排队规则）</a>
 <ul>
-<li><a href="#281-classful-qdisc-class-%E4%B8%AD%E7%9A%84-flow">2.8.1 Classful qdisc &amp; class 中的 flow</a></li>
-<li><a href="#282-qdisc-%E5%A4%A7%E5%AE%B6%E5%BA%ADroots-handles-siblings-and-parents">2.8.2 qdisc 大家庭：roots, handles, siblings and parents</a>
+<li><a href="#251-classful-qdisc-class-%E4%B8%AD%E7%9A%84-flow">2.5.1 Classful qdisc &amp; class 中的 flow</a></li>
+<li><a href="#252-qdisc-%E5%A4%A7%E5%AE%B6%E5%BA%ADroots-handles-siblings-and-parents">2.5.2 qdisc 大家庭：roots, handles, siblings and parents</a>
 <ul>
-<li><a href="#2821-%E5%A6%82%E4%BD%95%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8filters-%E5%AF%B9%E6%B5%81%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB">2.8.2.1 如何用过滤器（filters ）对流量进行分类</a></li>
-<li><a href="#2822-%E5%8C%85%E6%98%AF%E5%A6%82%E4%BD%95%E4%BB%8E-qdisc-%E5%87%BA%E9%98%9Fdequeue%E7%84%B6%E5%90%8E%E4%BA%A4%E7%BB%99%E7%A1%AC%E4%BB%B6%E7%9A%84">2.8.2.2 包是如何从 qdisc 出队（dequeue）然后交给硬件的</a></li>
+<li><a href="#2521-%E5%A6%82%E4%BD%95%E7%94%A8%E8%BF%87%E6%BB%A4%E5%99%A8filters-%E5%AF%B9%E6%B5%81%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%88%86%E7%B1%BB">2.5.2.1 如何用过滤器（filters ）对流量进行分类</a></li>
+<li><a href="#2522-%E5%8C%85%E6%98%AF%E5%A6%82%E4%BD%95%E4%BB%8E-qdisc-%E5%87%BA%E9%98%9Fdequeue%E7%84%B6%E5%90%8E%E4%BA%A4%E7%BB%99%E7%A1%AC%E4%BB%B6%E7%9A%84">2.5.2.2 包是如何从 qdisc 出队（dequeue）然后交给硬件的</a></li>
 </ul>
 </li>
-<li><a href="#283">2.8.3</a></li>
+<li><a href="#253-prio-qdisc%E4%BC%98%E5%85%88%E7%BA%A7%E6%8E%92%E9%98%9F%E8%A7%84%E5%88%99">2.5.3 PRIO qdisc（优先级排队规则）</a></li>
 </ul>
 </li>
 </ul>
@@ -690,8 +690,8 @@ PRIO qdisc 实际上不会整形，只会根据设置的过滤器对流量进行
                         <i class="post-share"></i>
                         <span>&#x5206;&#x4EAB;:</span>
                                                                     <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc traffic-control/"><i class="fa fa-qrcode"></i></a>
-                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc traffic-control/&sharesource=qzone&title=TC(Traffic Control)&pics=https://elegancewang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1604978788451&summary="><i class="fa fa-qq"></i></a>
-                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc traffic-control/&sharesource=weibo&title=TC(Traffic Control) + " - " + &pic="https://elegancewang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1604978788451 "><i class="fa fa-weibo "></i></a>
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc traffic-control/&sharesource=qzone&title=TC(Traffic Control)&pics=https://elegancewang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1604979309583&summary="><i class="fa fa-qq"></i></a>
+                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc traffic-control/&sharesource=weibo&title=TC(Traffic Control) + " - " + &pic="https://elegancewang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1604979309583 "><i class="fa fa-weibo "></i></a>
 
                                                                     </span>
                                                                     
@@ -826,7 +826,7 @@ PRIO qdisc 实际上不会整形，只会根据设置的过滤器对流量进行
                     CheckVersion();
                     
                     var newDate = new Date();
-                    newDate.setTime(1604978788451);
+                    newDate.setTime(1604979309583);
                     console.log(" Blog Update Time: " + newDate.toLocaleDateString());
                     console.log("\n %c \u26a1Theme:Chic Author's Blog:https://blog.itjoker.cn  Write By ITJoker  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;");
                 </script>
