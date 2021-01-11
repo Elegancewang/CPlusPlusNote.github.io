@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://elegancewang.github.io/CPlusPlusNote.github.io</id>
+    <id>https://RenzoWang.github.io/CPlusPlusNote.github.io</id>
     <title>Renzo&apos;s Blog</title>
-    <updated>2020-11-10T05:10:51.592Z</updated>
+    <updated>2021-01-11T12:38:18.425Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://elegancewang.github.io/CPlusPlusNote.github.io"/>
-    <link rel="self" href="https://elegancewang.github.io/CPlusPlusNote.github.io/atom.xml"/>
-    <logo>https://elegancewang.github.io/CPlusPlusNote.github.io/images/avatar.png</logo>
-    <icon>https://elegancewang.github.io/CPlusPlusNote.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Renzo&apos;s Blog</rights>
+    <link rel="alternate" href="https://RenzoWang.github.io/CPlusPlusNote.github.io"/>
+    <link rel="self" href="https://RenzoWang.github.io/CPlusPlusNote.github.io/atom.xml"/>
+    <logo>https://RenzoWang.github.io/CPlusPlusNote.github.io/images/avatar.png</logo>
+    <icon>https://RenzoWang.github.io/CPlusPlusNote.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2021, Renzo&apos;s Blog</rights>
     <entry>
         <title type="html"><![CDATA[Linux添加网卡]]></title>
-        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/</id>
-        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/">
+        <id>https://RenzoWang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/</id>
+        <link href="https://RenzoWang.github.io/CPlusPlusNote.github.io/post/linux-tian-jia-wang-qia/">
         </link>
         <updated>2020-11-03T07:48:52.000Z</updated>
         <content type="html"><![CDATA[<p>Debian/Ubuntu系列</p>
@@ -22,28 +22,28 @@
 <p>如果不想要这个虚拟网卡了,可以使用如下命令删除:</p>
 <p><code>sudo ifconfig eth0:0 down</code></p>
 <p>方法二：</p>
-<p><code>vim /etc/network/interfaces</code></p>
+<p><code>sudo vim /etc/network/interfaces</code></p>
 <p>添加并保存例如以下内容：</p>
-<pre><code>auto eth0:0
+<pre><code>auto ens33:0
 
-iface eth0:0 inet static
+iface ens33:0 inet static
 
-address 192.168.1.63
+address 10.60.0.1
 
-netmask 255.255.255.0
+netmask 255.0.0.0
 
 network 192.168.1.1
 
 broadcast 192.168.1.255
 </code></pre>
 <p>重启网卡生效</p>
-<p><code>/etc/init.d/networking restart</code></p>
+<p><code>sudo /etc/init.d/networking restart</code></p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[TC(Traffic Control)]]></title>
-        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc/</id>
-        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/tc/">
+        <id>https://RenzoWang.github.io/CPlusPlusNote.github.io/post/tc/</id>
+        <link href="https://RenzoWang.github.io/CPlusPlusNote.github.io/post/tc/">
         </link>
         <updated>2020-10-27T01:59:10.000Z</updated>
         <content type="html"><![CDATA[<!-- more -->
@@ -608,8 +608,8 @@ qdisc sfq 30: quantum 1514b
     </entry>
     <entry>
         <title type="html"><![CDATA[WebRTC 环境配置（Windows 平台）]]></title>
-        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/webrtc-huan-jing-pei-zhi/</id>
-        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/webrtc-huan-jing-pei-zhi/">
+        <id>https://RenzoWang.github.io/CPlusPlusNote.github.io/post/webrtc-huan-jing-pei-zhi/</id>
+        <link href="https://RenzoWang.github.io/CPlusPlusNote.github.io/post/webrtc-huan-jing-pei-zhi/">
         </link>
         <updated>2020-09-16T00:40:46.000Z</updated>
         <content type="html"><![CDATA[<p>万事开头难啊，webRTC配置过程中遇到的问题多种多样，有些问题很难搜索到，因此我记录下来供自己参考。</p>
@@ -620,14 +620,14 @@ qdisc sfq 30: quantum 1514b
 <p>b) <strong>Visual Studio 2019 Community 16.7.30503.244</strong></p>
 <p>c) <strong>Windows 10 SDK</strong><br>
 Windows 10.0.19041.1<br>
-<img src="https://elegancewang.github.io/CPlusPlusNote.github.io/post-images/1600217267438.png" alt="" loading="lazy"></p>
+<img src="https://RenzoWang.github.io/CPlusPlusNote.github.io/post-images/1600217267438.png" alt="" loading="lazy"></p>
 <p>d) <strong>Python</strong></p>
 <p>Python 3.8.5 64bit，编译过程中需添加到Path环境变量</p>
 <p>f) <strong>depot_tools</strong><br>
 depot_tools是包含下载、编译的相关工具，需要先下载并配置它，才能继续后面的操作。<br>
 下载地址:<a href="https://storage.googleapis.com/chrome-infra/depot_tools.zip">depot_tools</a></p>
 <p>下载后解压，并将解压好的depot_tools目录添加到path系统环境变量中，如下图所示：</p>
-<figure data-type="image" tabindex="1"><img src="https://elegancewang.github.io/CPlusPlusNote.github.io/post-images/1600218587975.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://RenzoWang.github.io/CPlusPlusNote.github.io/post-images/1600218587975.png" alt="" loading="lazy"></figure>
 <h1 id="2-环境变量配置">2 环境变量配置</h1>
 <p>有大量的环境变量需要配置，如果在cmd中set需要保持该窗口。一般在系统环境变量编辑里比较简单方便。<br>
 最开始我的设置如下：</p>
@@ -685,8 +685,8 @@ gclient sync
     </entry>
     <entry>
         <title type="html"><![CDATA[C++学习笔记]]></title>
-        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/learnC/</id>
-        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/learnC/">
+        <id>https://RenzoWang.github.io/CPlusPlusNote.github.io/post/learnC/</id>
+        <link href="https://RenzoWang.github.io/CPlusPlusNote.github.io/post/learnC/">
         </link>
         <updated>2020-07-22T06:01:37.000Z</updated>
         <content type="html"><![CDATA[<!-- more -->
@@ -836,8 +836,8 @@ public:
     </entry>
     <entry>
         <title type="html"><![CDATA[关于]]></title>
-        <id>https://elegancewang.github.io/CPlusPlusNote.github.io/post/about/</id>
-        <link href="https://elegancewang.github.io/CPlusPlusNote.github.io/post/about/">
+        <id>https://RenzoWang.github.io/CPlusPlusNote.github.io/post/about/</id>
+        <link href="https://RenzoWang.github.io/CPlusPlusNote.github.io/post/about/">
         </link>
         <updated>2019-01-25T11:09:48.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
