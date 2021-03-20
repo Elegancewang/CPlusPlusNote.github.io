@@ -86,7 +86,7 @@
                         <input id="switch_default" type="checkbox" class="switch_default">
                         <label for="switch_default" class="toggleBtn"></label>
             </div>
-            <form id="gridea-search-form" data-update="1616242167286" action="/search/index.html">
+            <form id="gridea-search-form" data-update="1616255424684" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
             </form>
         </div>
@@ -105,7 +105,7 @@
                         <!--zh-->
                         <a id="mobile-toggle-theme-zh" class="a zh">&nbsp;&#x6697;&#x9ED1;</a>
                     </div>
-                    <form id="gridea-search-form" data-update="1616242167286" action="/search/index.html">
+                    <form id="gridea-search-form" data-update="1616255424684" action="/search/index.html">
                         <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
                     </form>
                     <!--en-->
@@ -178,9 +178,9 @@
                                         </a>
                                         <span class="post-time">&#x65E5;&#x671F;: <a href="#">03-20-2021</a></span>
                                         <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
-                                    href="#">1.3
+                                    href="#">2.0
                                     &#x5206;&#x949F;</a></span>
-                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">260</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">385</a></span>
                                         
                                                 阅读量:
                                                 <span data-hk-page="current"> - </span>
@@ -245,21 +245,41 @@ public:
     }
 };
 </code></pre>
-<ol>
-<li>&quot;i++&quot; 与“++i”的区别<br>
+<p>** &quot;i++&quot; 与“++i”的区别**<br>
 i++ 与 ++i 的主要区别有两个：根本区别是语义上的区别<br>
 <strong>a.)</strong> i++ 返回原来的值，++i 返回加1后的值。<br>
-**b.) ** i++ 不能作为左值，而++i 可以。</li>
-</ol>
+**b.) ** i++ 不能作为左值，而++i 可以。</p>
 <p>如果没有用到返回值的话，区别在于效率。</p>
 <ul>
 <li>若i是内置的数值类型，两者完全一样</li>
 <li>若i是一些自定义的类，如iterator，++i的效率 &gt; = i++的效率</li>
 </ul>
-<ol start="2">
-<li></li>
-<li></li>
-</ol>
+<p>##旋转数组<br>
+给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    void rotate(vector&lt;int&gt;&amp; nums, int k) {
+        int length = nums.size();
+        vector&lt;int&gt; temp(length);
+        k = k % length; // Determine whether *k* exceeds the length of array
+        
+        if(nums.empty() || (nums.size()==0)){
+            std::cout &lt;&lt; &quot;Invalid Parameter&quot; &lt;&lt; std::endl;
+        }
+        for (int i = 0; i &lt; nums.size(); i++) {
+            temp[i] = nums[i];
+        }
+        for(int i = 0; i &lt; k; ++i)
+        {
+            nums[i] = temp [length-k+i];
+        }
+        for(int j= k; j &lt; nums.size(); ++j)
+        {
+            nums[j] = temp[j-k];
+        }
+    }
+};
+</code></pre>
 
                         </div>
                         
@@ -294,10 +314,10 @@ i++ 与 ++i 的主要区别有两个：根本区别是语义上的区别<br>
                         <i class="post-share"></i>
                         <span>&#x5206;&#x4EAB;:</span>
                                                                     <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://RenzoWang.github.io/CPlusPlusNote.github.io/post/algorithms/"><i class="fa fa-qrcode"></i></a>
-                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://RenzoWang.github.io/CPlusPlusNote.github.io/post/algorithms/&sharesource=qzone&title=Algorithms&pics=https://RenzoWang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1616242167286&summary=&lt;p&gt;LeetCode&lt;/p&gt;
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://RenzoWang.github.io/CPlusPlusNote.github.io/post/algorithms/&sharesource=qzone&title=Algorithms&pics=https://RenzoWang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1616255424684&summary=&lt;p&gt;LeetCode&lt;/p&gt;
 "><i class="fa fa-qq"></i></a>
                                                                     <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://RenzoWang.github.io/CPlusPlusNote.github.io/post/algorithms/&sharesource=weibo&title=Algorithms + " - " + &lt;p&gt;LeetCode&lt;/p&gt;
-&pic="https://RenzoWang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1616242167286 "><i class="fa fa-weibo "></i></a>
+&pic="https://RenzoWang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1616255424684 "><i class="fa fa-weibo "></i></a>
 
                                                                     </span>
                                                                     
@@ -418,7 +438,7 @@ i++ 与 ++i 的主要区别有两个：根本区别是语义上的区别<br>
                     CheckVersion();
                     
                     var newDate = new Date();
-                    newDate.setTime(1616242167286);
+                    newDate.setTime(1616255424684);
                     console.log(" Blog Update Time: " + newDate.toLocaleDateString());
                     console.log("\n %c \u26a1Theme:Chic Author's Blog:https://blog.itjoker.cn  Write By ITJoker  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;");
                 </script>
