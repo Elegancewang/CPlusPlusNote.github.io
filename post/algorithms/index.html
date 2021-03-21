@@ -86,7 +86,7 @@
                         <input id="switch_default" type="checkbox" class="switch_default">
                         <label for="switch_default" class="toggleBtn"></label>
             </div>
-            <form id="gridea-search-form" data-update="1616255424684" action="/search/index.html">
+            <form id="gridea-search-form" data-update="1616327506041" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
             </form>
         </div>
@@ -105,7 +105,7 @@
                         <!--zh-->
                         <a id="mobile-toggle-theme-zh" class="a zh">&nbsp;&#x6697;&#x9ED1;</a>
                     </div>
-                    <form id="gridea-search-form" data-update="1616255424684" action="/search/index.html">
+                    <form id="gridea-search-form" data-update="1616327506041" action="/search/index.html">
                         <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
                     </form>
                     <!--en-->
@@ -178,9 +178,9 @@
                                         </a>
                                         <span class="post-time">&#x65E5;&#x671F;: <a href="#">03-20-2021</a></span>
                                         <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
-                                    href="#">2.0
+                                    href="#">2.5
                                     &#x5206;&#x949F;</a></span>
-                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">385</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">502</a></span>
                                         
                                                 阅读量:
                                                 <span data-hk-page="current"> - </span>
@@ -192,8 +192,8 @@
                         <div class="post-content">
                             <p>LeetCode</p>
 <!-- more -->
-<p>#数组<br>
-##1.删除排序数组中的重复项</p>
+<h1 id="数组">数组</h1>
+<h2 id="1删除排序数组中的重复项">1.删除排序数组中的重复项</h2>
 <pre><code class="language-cpp">class Solution {
 public:
     int removeDuplicates(vector&lt;int&gt;&amp; nums) {
@@ -280,11 +280,42 @@ public:
     }
 };
 </code></pre>
+<p>##217. 存在重复元素<br>
+给定一个整数数组，判断是否存在重复元素。</p>
+<p>如果存在一值在数组中出现至少两次，函数返回 true 。如果数组中每个元素都不相同，则返回 false 。</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    bool containsDuplicate(vector&lt;int&gt;&amp; nums) {
+
+
+        if(nums.empty() || (nums.size()==0)){
+            std::cout &lt;&lt; &quot;Invalid Parameter&quot; &lt;&lt; std::endl;
+        }
+        sort(nums.begin(), nums.end());
+        for(int i = 0; i &lt; nums.size()-1; ++i)
+        {
+            if (nums[i] == nums[i+1]){
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+};
+</code></pre>
 
                         </div>
                         
                             <div class="post-toc">
-                                
+                                <ul class="markdownIt-TOC">
+<li><a href="#%E6%95%B0%E7%BB%84">数组</a>
+<ul>
+<li><a href="#1%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9">1.删除排序数组中的重复项</a></li>
+</ul>
+</li>
+</ul>
+
                             </div>
                             
                                 
@@ -314,10 +345,10 @@ public:
                         <i class="post-share"></i>
                         <span>&#x5206;&#x4EAB;:</span>
                                                                     <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://RenzoWang.github.io/CPlusPlusNote.github.io/post/algorithms/"><i class="fa fa-qrcode"></i></a>
-                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://RenzoWang.github.io/CPlusPlusNote.github.io/post/algorithms/&sharesource=qzone&title=Algorithms&pics=https://RenzoWang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1616255424684&summary=&lt;p&gt;LeetCode&lt;/p&gt;
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://RenzoWang.github.io/CPlusPlusNote.github.io/post/algorithms/&sharesource=qzone&title=Algorithms&pics=https://RenzoWang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1616327506041&summary=&lt;p&gt;LeetCode&lt;/p&gt;
 "><i class="fa fa-qq"></i></a>
                                                                     <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://RenzoWang.github.io/CPlusPlusNote.github.io/post/algorithms/&sharesource=weibo&title=Algorithms + " - " + &lt;p&gt;LeetCode&lt;/p&gt;
-&pic="https://RenzoWang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1616255424684 "><i class="fa fa-weibo "></i></a>
+&pic="https://RenzoWang.github.io/CPlusPlusNote.github.io/images/avatar.png?v=1616327506041 "><i class="fa fa-weibo "></i></a>
 
                                                                     </span>
                                                                     
@@ -438,7 +469,7 @@ public:
                     CheckVersion();
                     
                     var newDate = new Date();
-                    newDate.setTime(1616255424684);
+                    newDate.setTime(1616327506041);
                     console.log(" Blog Update Time: " + newDate.toLocaleDateString());
                     console.log("\n %c \u26a1Theme:Chic Author's Blog:https://blog.itjoker.cn  Write By ITJoker  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;");
                 </script>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://RenzoWang.github.io/CPlusPlusNote.github.io</id>
     <title>Renzo&apos;s Blog</title>
-    <updated>2021-03-20T15:50:27.486Z</updated>
+    <updated>2021-03-21T11:51:49.593Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://RenzoWang.github.io/CPlusPlusNote.github.io"/>
     <link rel="self" href="https://RenzoWang.github.io/CPlusPlusNote.github.io/atom.xml"/>
@@ -19,8 +19,8 @@
 ]]></summary>
         <content type="html"><![CDATA[<p>LeetCode</p>
 <!-- more -->
-<p>#数组<br>
-##1.删除排序数组中的重复项</p>
+<h1 id="数组">数组</h1>
+<h2 id="1删除排序数组中的重复项">1.删除排序数组中的重复项</h2>
 <pre><code class="language-cpp">class Solution {
 public:
     int removeDuplicates(vector&lt;int&gt;&amp; nums) {
@@ -104,6 +104,30 @@ public:
         {
             nums[j] = temp[j-k];
         }
+    }
+};
+</code></pre>
+<p>##217. 存在重复元素<br>
+给定一个整数数组，判断是否存在重复元素。</p>
+<p>如果存在一值在数组中出现至少两次，函数返回 true 。如果数组中每个元素都不相同，则返回 false 。</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    bool containsDuplicate(vector&lt;int&gt;&amp; nums) {
+
+
+        if(nums.empty() || (nums.size()==0)){
+            std::cout &lt;&lt; &quot;Invalid Parameter&quot; &lt;&lt; std::endl;
+        }
+        sort(nums.begin(), nums.end());
+        for(int i = 0; i &lt; nums.size()-1; ++i)
+        {
+            if (nums[i] == nums[i+1]){
+                return true;
+            }
+        }
+
+        return false;
+
     }
 };
 </code></pre>
