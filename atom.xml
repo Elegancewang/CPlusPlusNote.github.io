@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://RenzoWang.github.io/Notes.github.io</id>
     <title>Renzo&apos;s Blog</title>
-    <updated>2021-03-23T13:22:10.125Z</updated>
+    <updated>2021-03-23T13:24:41.159Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://RenzoWang.github.io/Notes.github.io"/>
     <link rel="self" href="https://RenzoWang.github.io/Notes.github.io/atom.xml"/>
@@ -173,6 +173,7 @@ public:
 };
 </code></pre>
 <h2 id="283-移动零">283. 移动零</h2>
+<p>给定一个数组 <code>nums</code>，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
 <pre><code class="language-cpp">class Solution {
 public:
     void moveZeroes(vector&lt;int&gt;&amp; nums) {
