@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://RenzoWang.github.io/Notes.github.io</id>
     <title>Renzo&apos;s Blog</title>
-    <updated>2021-03-23T13:20:30.257Z</updated>
+    <updated>2021-03-23T13:22:10.125Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://RenzoWang.github.io/Notes.github.io"/>
     <link rel="self" href="https://RenzoWang.github.io/Notes.github.io/atom.xml"/>
@@ -107,6 +107,21 @@ i++ 与 ++i 的主要区别有两个：根本区别是语义上的区别<br>
 <li>若i是内置的数值类型，两者完全一样</li>
 <li>若i是一些自定义的类，如iterator，++i的效率 &gt; = i++的效率</li>
 </ul>
+<h2 id="136只出现一次的数字">136.只出现一次的数字</h2>
+<p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int singleNumber(vector&lt;int&gt;&amp; nums) {
+        int repeat = 0;
+
+        for(int i = 0; i&lt; nums.size(); ++i)
+        {
+            repeat ^= nums[i];
+        }
+        return repeat;
+    }
+};
+</code></pre>
 <h2 id="189旋转数组">189.旋转数组</h2>
 <p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。</p>
 <pre><code class="language-cpp">class Solution {
@@ -154,21 +169,6 @@ public:
 
         return false;
 
-    }
-};
-</code></pre>
-<h2 id="136只出现一次的数字">136.只出现一次的数字</h2>
-<p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
-<pre><code class="language-cpp">class Solution {
-public:
-    int singleNumber(vector&lt;int&gt;&amp; nums) {
-        int repeat = 0;
-
-        for(int i = 0; i&lt; nums.size(); ++i)
-        {
-            repeat ^= nums[i];
-        }
-        return repeat;
     }
 };
 </code></pre>
