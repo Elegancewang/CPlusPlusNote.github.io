@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://RenzoWang.github.io/Notes.github.io</id>
     <title>Renzo&apos;s Blog</title>
-    <updated>2021-03-23T12:07:00.046Z</updated>
+    <updated>2021-03-23T13:20:30.257Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://RenzoWang.github.io/Notes.github.io"/>
     <link rel="self" href="https://RenzoWang.github.io/Notes.github.io/atom.xml"/>
@@ -169,6 +169,34 @@ public:
             repeat ^= nums[i];
         }
         return repeat;
+    }
+};
+</code></pre>
+<h2 id="283-移动零">283. 移动零</h2>
+<pre><code class="language-cpp">class Solution {
+public:
+    void moveZeroes(vector&lt;int&gt;&amp; nums) {
+        int length = nums.size();
+       // vector&lt;int&gt; nums2(length);
+        int index = 0;
+        for(int i=0; i&lt;=length-1; i++)
+        {
+            if(nums[i] != 0)
+            {
+                nums[index] = nums[i];
+                index++;
+            }
+        }
+
+        if((length -index) &gt; 0)
+        {
+            for(int i = index; i &lt;= length -1; i++)
+            {
+                nums[i] = 0;
+            }
+        }
+        //nums = nums2;
+
     }
 };
 </code></pre>
