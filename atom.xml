@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://RenzoWang.github.io/Notes.github.io</id>
     <title>Renzo&apos;s Blog</title>
-    <updated>2021-03-23T13:24:41.159Z</updated>
+    <updated>2021-03-24T12:08:10.048Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://RenzoWang.github.io/Notes.github.io"/>
     <link rel="self" href="https://RenzoWang.github.io/Notes.github.io/atom.xml"/>
@@ -49,6 +49,44 @@ public:
         }
 
         return nums.size() - count;
+    }
+};
+</code></pre>
+<h2 id="48旋转图像">48.旋转图像</h2>
+<p>给定一个 <em>n × n</em> 的二维矩阵 <code>matrix</code> 表示一个图像。请你将图像顺时针旋转 90 度。</p>
+<p>你必须在 <strong>原地</strong> 旋转图像，这意味着你需要直接修改输入的二维矩阵。<strong>请不要</strong> 使用另一个矩阵来旋转图像。<br>
+顺时针旋转90°：<br>
+[1,2],[3,4]<br>
+=&gt;[3,1],[4,2];<br>
+其中可以看出：</p>
+<p>(i,j)顺时针旋转90°为(j,row-1-i);<br>
+若继续旋转90°为(row-1-i,col-1-j);<br>
+再顺时针旋转90°为(col-1-j,i);<br>
+可以知道将矩阵中的一个数给顺时针旋转90°，也就是将四个数互相交换位置</p>
+<pre><code class="language-c">    //其中row为行,col为列
+    swap(matrix[i][j],matrix[col-1-j][i]);
+	swap(matrix[col-1-j][i],matrix[row-1-i][col-1-j]);
+	swap(matrix[row-1-i][col-1-j],matrix[j][row-1-i]);
+    ```
+```cpp
+class Solution {
+public:
+    void rotate(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) {
+         for(size_t i = 0;i&lt;(matrix.size()+1)/2;++i)
+        {
+            for(size_t j =i;j&lt;matrix.size()-i-1;++j)
+            {
+                swap(matrix[i][j],
+                matrix[matrix.size()-1-j][i]);
+
+                swap(matrix[matrix.size()-1-j][i],
+                matrix[matrix.size()-1-i][matrix.size()-1-j]);
+
+                swap(matrix[matrix.size()-1-i][matrix.size()-1-j]
+                ,matrix[j][matrix.size()-1-i]);
+            }    
+        }
+
     }
 };
 </code></pre>
