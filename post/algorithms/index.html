@@ -86,7 +86,7 @@
                         <input id="switch_default" type="checkbox" class="switch_default">
                         <label for="switch_default" class="toggleBtn"></label>
             </div>
-            <form id="gridea-search-form" data-update="1616587685300" action="/search/index.html">
+            <form id="gridea-search-form" data-update="1617979229930" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
             </form>
         </div>
@@ -105,7 +105,7 @@
                         <!--zh-->
                         <a id="mobile-toggle-theme-zh" class="a zh">&nbsp;&#x6697;&#x9ED1;</a>
                     </div>
-                    <form id="gridea-search-form" data-update="1616587685300" action="/search/index.html">
+                    <form id="gridea-search-form" data-update="1617979229930" action="/search/index.html">
                         <input class="search-input" autocomplete="off" spellcheck="false" name="q" autofocus="true" placeholder="Search...">
                     </form>
                     <!--en-->
@@ -178,9 +178,9 @@
                                         </a>
                                         <span class="post-time">&#x65E5;&#x671F;: <a href="#">03-20-2021</a></span>
                                         <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
-                                    href="#">5.8
+                                    href="#">6.7
                                     &#x5206;&#x949F;</a></span>
-                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">1144</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">1348</a></span>
                                         
                                             <span class="post-category">&#x5206;&#x7C7B;:
                                 
@@ -441,8 +441,52 @@ public:
     }
 };
 </code></pre>
-<pre><code class="language-cpp"></code></pre>
-<pre><code class="language-cpp"></code></pre>
+<h1 id="字符串">字符串</h1>
+<h2 id="344反转字符串">344.反转字符串</h2>
+<p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。</p>
+<p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。</p>
+<p>你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</p>
+<p><strong>对称交换</strong></p>
+<pre><code class="language-cpp">class Solution {
+public:
+    void reverseString(vector&lt;char&gt;&amp; s) {
+        int length = s.size();
+        for (int i = 0; i &lt; (length+1)/2; ++i)
+        {
+            swap(s[i],s[length-1-i]);
+        }
+        
+
+    }
+};
+
+</code></pre>
+<h2 id="7整数反转">7.整数反转</h2>
+<pre><code class="language-cpp">class Solution {
+public:
+    int reverse(int x) {
+        int rev = 0;
+        while(x != 0)
+        {
+            int pop = x %10;
+            x /=10;
+            if((rev &gt; INT_MAX/10))
+            {
+                return 0;
+            }
+            if((rev &lt; INT_MIN/10))
+            {
+                return 0;
+
+            }
+            rev = rev*10 +pop;
+        }
+        return rev;
+
+    }
+};
+</code></pre>
+<h2 id="字符串中的第一个唯一字符">字符串中的第一个唯一字符</h2>
 <pre><code class="language-cpp"></code></pre>
 
                         </div>
@@ -460,6 +504,13 @@ public:
 <li><a href="#217-%E5%AD%98%E5%9C%A8%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0">217. 存在重复元素</a></li>
 <li><a href="#283-%E7%A7%BB%E5%8A%A8%E9%9B%B6">283. 移动零</a></li>
 <li><a href="#350-%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86-ii">350. 两个数组的交集 II</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2">字符串</a>
+<ul>
+<li><a href="#344%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2">344.反转字符串</a></li>
+<li><a href="#7%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC">7.整数反转</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%94%AF%E4%B8%80%E5%AD%97%E7%AC%A6">字符串中的第一个唯一字符</a></li>
 </ul>
 </li>
 </ul>
@@ -493,10 +544,10 @@ public:
                         <i class="post-share"></i>
                         <span>&#x5206;&#x4EAB;:</span>
                                                                     <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://RenzoWang.github.io/Notes.github.io/post/algorithms/"><i class="fa fa-qrcode"></i></a>
-                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://RenzoWang.github.io/Notes.github.io/post/algorithms/&sharesource=qzone&title=Algorithms&pics=https://RenzoWang.github.io/Notes.github.io/images/avatar.png?v=1616587685300&summary=&lt;p&gt;LeetCode&lt;/p&gt;
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://RenzoWang.github.io/Notes.github.io/post/algorithms/&sharesource=qzone&title=Algorithms&pics=https://RenzoWang.github.io/Notes.github.io/images/avatar.png?v=1617979229930&summary=&lt;p&gt;LeetCode&lt;/p&gt;
 "><i class="fa fa-qq"></i></a>
                                                                     <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://RenzoWang.github.io/Notes.github.io/post/algorithms/&sharesource=weibo&title=Algorithms + " - " + &lt;p&gt;LeetCode&lt;/p&gt;
-&pic="https://RenzoWang.github.io/Notes.github.io/images/avatar.png?v=1616587685300 "><i class="fa fa-weibo "></i></a>
+&pic="https://RenzoWang.github.io/Notes.github.io/images/avatar.png?v=1617979229930 "><i class="fa fa-weibo "></i></a>
 
                                                                     </span>
                                                                     
@@ -623,7 +674,7 @@ public:
                     CheckVersion();
                     
                     var newDate = new Date();
-                    newDate.setTime(1616587685300);
+                    newDate.setTime(1617979229930);
                     console.log(" Blog Update Time: " + newDate.toLocaleDateString());
                     console.log("\n %c \u26a1Theme:Chic Author's Blog:https://blog.itjoker.cn  Write By ITJoker  \n\n", "color: #ffffff; background: rgba(49, 49, 49, 0.85); padding:5px 0;border-radius:5px;");
                 </script>

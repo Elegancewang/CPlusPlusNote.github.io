@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://RenzoWang.github.io/Notes.github.io</id>
     <title>Renzo&apos;s Blog</title>
-    <updated>2021-03-24T12:08:10.048Z</updated>
+    <updated>2021-04-09T14:40:32.506Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://RenzoWang.github.io/Notes.github.io"/>
     <link rel="self" href="https://RenzoWang.github.io/Notes.github.io/atom.xml"/>
@@ -262,8 +262,52 @@ public:
     }
 };
 </code></pre>
-<pre><code class="language-cpp"></code></pre>
-<pre><code class="language-cpp"></code></pre>
+<h1 id="字符串">字符串</h1>
+<h2 id="344反转字符串">344.反转字符串</h2>
+<p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。</p>
+<p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。</p>
+<p>你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</p>
+<p><strong>对称交换</strong></p>
+<pre><code class="language-cpp">class Solution {
+public:
+    void reverseString(vector&lt;char&gt;&amp; s) {
+        int length = s.size();
+        for (int i = 0; i &lt; (length+1)/2; ++i)
+        {
+            swap(s[i],s[length-1-i]);
+        }
+        
+
+    }
+};
+
+</code></pre>
+<h2 id="7整数反转">7.整数反转</h2>
+<pre><code class="language-cpp">class Solution {
+public:
+    int reverse(int x) {
+        int rev = 0;
+        while(x != 0)
+        {
+            int pop = x %10;
+            x /=10;
+            if((rev &gt; INT_MAX/10))
+            {
+                return 0;
+            }
+            if((rev &lt; INT_MIN/10))
+            {
+                return 0;
+
+            }
+            rev = rev*10 +pop;
+        }
+        return rev;
+
+    }
+};
+</code></pre>
+<h2 id="字符串中的第一个唯一字符">字符串中的第一个唯一字符</h2>
 <pre><code class="language-cpp"></code></pre>
 ]]></content>
     </entry>
