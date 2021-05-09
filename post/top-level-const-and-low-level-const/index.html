@@ -164,33 +164,150 @@
 </script>
             <div class="main">
                 <div class="container">
-                    <div class="post-wrap archive">
-                        
+                    <article class="post-wrap">
+                        <header class="post-header">
+                            <h1 class="post-title">
+                                top-level const &amp; low-level const
+                            </h1>
                             
-                                <h3>
-                                    2021
-                                </h3>
+                                    <!--zh-->
+                                    <div class="post-meta zh">
+                                        &#x4F5C;&#x8005;:
+                                        <a itemprop="author" rel="author" href="/">
+                                            Renzo's Blog
+                                        </a>
+                                        <span class="post-time">&#x65E5;&#x671F;: <a href="#">05-09-2021</a></span>
+                                        <span class="post-readtime">&#x9605;&#x8BFB;&#x65F6;&#x95F4;:<a
+                                    href="#">1.4
+                                    &#x5206;&#x949F;</a></span>
+                                        <span class="post-words">&#x5B57;&#x6570;:<a href="#">340</a></span>
+                                        
+                                                阅读量:
+                                                <span data-hk-page="current"> - </span>
+                                                
+                                    </div>
+                                    
+                        </header>
+                        
+                        <div class="post-content">
+                            <h3 id="top-level-const-low-level-const">top-level const &amp; low-level const</h3>
+<p>top-level const to indicate that the pointer itself is a const. When a pointer can point to a const object, we refer tothat const as a low-level const.</p>
+<ul>
+<li>
+<p>一般的变量来说，其实没有顶层const和底层const的区别<br>
+1.一个指针本身添加const限定符就是顶层const。（指针被限定则 顶）<br>
+　　　　　　　　　　　　　　　　  2.而指针所指的对象添加const限定符就是底层const。（对象被限则 底）</p>
+</li>
+<li>
+<p>执行对象拷贝时有限制，常量的底层const不能赋值给非常量的底层const。</p>
+</li>
+</ul>
+<pre><code class="language-cpp">int num_c = 3;  
+const int *p_c = &amp;num_c;  //p_c为底层const的指针     还有一点记住  就是不能通过p_c去修改变量的值
+//int *p_d = p_c;  //错误，不能将底层const指针赋值给非底层const指针  
+const int *p_d = p_c; //正确，可以将底层const指针复制给底层const指针  
+</code></pre>
+<ul>
+<li>使用命名的强制类型转换函数const_cast时，需要能够分辨底层const和顶层const，因为const_cast只能改变运算对象的底层const</li>
+</ul>
+<pre><code class="language-cpp">int num_e = 4;  
+const int *p_e = &amp;num_e;  
+//*p_e = 5;  //错误，不能改变底层const指针指向的内容  
+int *p_f = const_cast&lt;int *&gt;(p_e);  //正确，const_cast可以改变运算对象的底层const。但是使用时一定要知道num_e不是const的类型。  
+*p_f = 5;  //正确，非顶层const指针可以改变指向的内容  
+cout &lt;&lt; num_e;  //输出5 
+</code></pre>
+
+                        </div>
+                        
+                            <div class="post-toc">
+                                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#top-level-const-low-level-const">top-level const &amp; low-level const</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                            </div>
+                            
                                 
                                     
+                                            <!--zh-->
+                                            <section class="post-copyright zh">
+                                                <p class="copyright-item ">
+                                                    <span>&#x4F5C;&#x8005;:</span>
+                                                    <span>Renzo's Blog</span>
+                                                </p>
 
-                                        <article class="archive-item">
-                                            <a class="archive-item-link" href="https://RenzoWang.github.io/Notes.github.io/post/algorithms/">
-                                                Algorithms
-                                            </a>
-                                            <span class="archive-item-date">03-20-2021 </span>
-                                        </article>
-                                        
+                                                <p class="copyright-item">
+                                                    <span>&#x6C38;&#x4E45;&#x94FE;&#x63A5;:</span>
+                                                    <span><a href="https://RenzoWang.github.io/Notes.github.io/post/top-level-const-and-low-level-const/">https://RenzoWang.github.io/Notes.github.io/post/top-level-const-and-low-level-const/</a></span>
+                                                </p>
+
+                                                <p class="copyright-item">
+                                                    <span>&#x534F;&#x8BAE;:</span>
+                                                    <span>MIT License</span>
+                                                </p>
+                                            </section>
                                             
                                                 
-                    </div>
-                    <div class="pagination-container">
+                                                    
+                                                                    <!--Share-->
+                                                                    <span style="margin-right:15px">
+                        <i class="post-share"></i>
+                        <span>&#x5206;&#x4EAB;:</span>
+                                                                    <a title="QR 码" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://RenzoWang.github.io/Notes.github.io/post/top-level-const-and-low-level-const/"><i class="fa fa-qrcode"></i></a>
+                                                                    <a title="QQ" target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://RenzoWang.github.io/Notes.github.io/post/top-level-const-and-low-level-const/&sharesource=qzone&title=top-level const &amp; low-level const&pics=https://RenzoWang.github.io/Notes.github.io/images/avatar.png?v=1620547047942&summary="><i class="fa fa-qq"></i></a>
+                                                                    <a title="新浪微博" target="_blank" href="https://service.weibo.com/share/share.php?url=https://RenzoWang.github.io/Notes.github.io/post/top-level-const-and-low-level-const/&sharesource=weibo&title=top-level const &amp; low-level const + " - " + &pic="https://RenzoWang.github.io/Notes.github.io/images/avatar.png?v=1620547047942 "><i class="fa fa-weibo "></i></a>
+
+                                                                    </span>
+                                                                    
+                                                                        <div class="reward ">
+                                                                            <div class="reward-button ">&yen;
+                                                                                <span class="reward-code "> 
+                        <span class="alipay-code "> <img class="alipay-img " alt = "support " src="https://blog.itjoker.cn/alipay.jpg"><b>支付宝</b> </span>
+                                                                                <span class="wechat-code "> <img alt ="support " class="wechat-img " src="https://blog.itjoker.cn/wechat.jpg"><b>微信</b> </span> </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                            <!--zh-->
+                                                                            <section class="post-tags zh ">
+                                                                                <div>
+                                                                                    <span>&#x6807;&#x7B7E;:</span>
+                                                                                    <span class="tag ">
                         
-                            
-                                    
-                                            
-                    </div>
+                                </span>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <a href="javascript:window.history.back();">
+                        &#x8FD4;&#x56DE;</a>
+                                                                                    <span>&dot;</span>
+                                                                                    <a href="#">&#x4E3B;&#x9875;</a>
+                                                                                </div>
+                                                                            </section>
+
+                                                                            
+                                                                                <!---->
+                                                                                <section class="post-nav">
+                                                                                    
+                                                                                            
+                                                                                                <a class="next" rel="next" href="https://RenzoWang.github.io/Notes.github.io/post/android-project/">
+                                                                                                    Android Project
+                                                                                                </a>
+                                                                                                
+                                                                                </section>
+                    </article>
                 </div>
+                
+                                            
             </div>
+    </div>
+    </div>
     </div>
     
     <div id="player"></div>
@@ -317,5 +434,8 @@
                     
         </div>
 </body>
+<script>
+    scroll();
+</script>
 
 </html>

@@ -2,13 +2,61 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://RenzoWang.github.io/Notes.github.io</id>
     <title>Renzo&apos;s Blog</title>
-    <updated>2021-04-26T07:09:05.416Z</updated>
+    <updated>2021-05-09T07:57:33.331Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://RenzoWang.github.io/Notes.github.io"/>
     <link rel="self" href="https://RenzoWang.github.io/Notes.github.io/atom.xml"/>
     <logo>https://RenzoWang.github.io/Notes.github.io/images/avatar.png</logo>
     <icon>https://RenzoWang.github.io/Notes.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Renzo&apos;s Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[top-level const & low-level const]]></title>
+        <id>https://RenzoWang.github.io/Notes.github.io/post/top-level-const-and-low-level-const/</id>
+        <link href="https://RenzoWang.github.io/Notes.github.io/post/top-level-const-and-low-level-const/">
+        </link>
+        <updated>2021-05-09T07:57:12.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="top-level-const-low-level-const">top-level const &amp; low-level const</h3>
+<p>top-level const to indicate that the pointer itself is a const. When a pointer can point to a const object, we refer tothat const as a low-level const.</p>
+<ul>
+<li>
+<p>一般的变量来说，其实没有顶层const和底层const的区别<br>
+1.一个指针本身添加const限定符就是顶层const。（指针被限定则 顶）<br>
+　　　　　　　　　　　　　　　　  2.而指针所指的对象添加const限定符就是底层const。（对象被限则 底）</p>
+</li>
+<li>
+<p>执行对象拷贝时有限制，常量的底层const不能赋值给非常量的底层const。</p>
+</li>
+</ul>
+<pre><code class="language-cpp">int num_c = 3;  
+const int *p_c = &amp;num_c;  //p_c为底层const的指针     还有一点记住  就是不能通过p_c去修改变量的值
+//int *p_d = p_c;  //错误，不能将底层const指针赋值给非底层const指针  
+const int *p_d = p_c; //正确，可以将底层const指针复制给底层const指针  
+</code></pre>
+<ul>
+<li>使用命名的强制类型转换函数const_cast时，需要能够分辨底层const和顶层const，因为const_cast只能改变运算对象的底层const</li>
+</ul>
+<pre><code class="language-cpp">int num_e = 4;  
+const int *p_e = &amp;num_e;  
+//*p_e = 5;  //错误，不能改变底层const指针指向的内容  
+int *p_f = const_cast&lt;int *&gt;(p_e);  //正确，const_cast可以改变运算对象的底层const。但是使用时一定要知道num_e不是const的类型。  
+*p_f = 5;  //正确，非顶层const指针可以改变指向的内容  
+cout &lt;&lt; num_e;  //输出5 
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Android Project]]></title>
+        <id>https://RenzoWang.github.io/Notes.github.io/post/android-project/</id>
+        <link href="https://RenzoWang.github.io/Notes.github.io/post/android-project/">
+        </link>
+        <updated>2021-04-16T12:35:28.000Z</updated>
+        <summary type="html"><![CDATA[<p>A lite project for IM Chat App</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>A lite project for IM Chat App</p>
+<!-- more -->
+<p><a href="https://github.com/RenzoWang/iems5722">Here</a> is the code</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[for vs. while in C programming]]></title>
         <id>https://RenzoWang.github.io/Notes.github.io/post/for-vs-while-in-c-programming/</id>
